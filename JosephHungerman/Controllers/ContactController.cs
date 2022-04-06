@@ -1,11 +1,10 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-
-namespace JosephHungerman.Controllers
+﻿namespace JosephHungerman.Controllers
 {
-    [Route("api/[controller]")]
-    [ApiController]
-    public class ContactController : ControllerBase
+    public class ContactController : BaseApiController
     {
+        public ContactController()
+        {
+            
+        }
     }
 }

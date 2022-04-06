@@ -1,15 +1,21 @@
-using Azure.Extensions.AspNetCore.Configuration.Secrets;
-using Azure.Identity;
 using JosephHungerman.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
+//builder.Host.ConfigureAppConfiguration((_, config) =>
+//{
+//    var settings = config.Build();
+
+//    var keyVaultEndpoint = settings["KV_URI"];
+
+//    config.AddAzureKeyVault(new Uri(keyVaultEndpoint), new DefaultAzureCredential(), new KeyVaultSecretManager());
+//});
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
-builder.Services.AddApplicationServices();
+builder.Services.AddApplicationServices(builder.Configuration);
 
-var endpoint = new Uri(Environment.GetEnvironmentVariable("KV_URI") ?? string.Empty);
-builder.Configuration.AddAzureKeyVault(endpoint, new DefaultAzureCredential(), new KeyVaultSecretManager());
+//var endpoint = new Uri(Environment.GetEnvironmentVariable("KV_URI") ?? string.Empty);
+//builder.Configuration.AddAzureKeyVault(endpoint, new DefaultAzureCredential(), new KeyVaultSecretManager());
 
 var app = builder.Build();
 
