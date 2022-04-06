@@ -9,9 +9,7 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddApplicationServices();
 
 var endpoint = new Uri(Environment.GetEnvironmentVariable("KV_URI") ?? string.Empty);
-builder.Configuration.AddAzureKeyVault(endpoint, new DefaultAzureCredential());
-
-var test = builder.Configuration.GetConnectionString("jsh-stage");
+builder.Configuration.AddAzureKeyVault(endpoint, new DefaultAzureCredential(), new KeyVaultSecretManager());
 
 var app = builder.Build();
 
