@@ -55,10 +55,11 @@ namespace JosephHungerman.Tests
         public async void ReturnSuccessfulResponseWhenRepositoryCallIsSuccessful()
         {
             var successResponse = (List<Message>)MockServiceResults.GetMessagesSuccessResult();
-            var mappedResponse = _mapper.Object.Map<List<MessageDto>>(successResponse);
-            var expectedResponse = new ServiceResponseDtos<List<MessageDto>>.ServiceSuccessResponse(mappedResponse);
+            var messageDtos = (List<MessageDto>)MockServiceResults.GetMessagesDtoSuccessResult();
+            var expectedResponse = new ServiceResponseDtos<List<MessageDto>>.ServiceSuccessResponse(messageDtos);
             _unitOfWork.Setup(x => x.MessageRepository.GetAsync(It.IsAny<Expression<Func<Message, bool>>?>(),
                 It.IsAny<Func<IQueryable<Message>, IOrderedQueryable<Message>>?>(), It.IsAny<string>())).ReturnsAsync(successResponse);
+            _mapper.Setup(x => x.Map<List<MessageDto>>(successResponse)).Returns(messageDtos);
 
             var sut = new ContactService(_unitOfWork.Object, _mapper.Object);
             var result = await sut.GetMessagesAsync();
@@ -129,6 +130,24 @@ namespace JosephHungerman.Tests
             var result = await sut.AddMessageAsync(messageDtos.First());
 
             result.Should().BeEquivalentTo(expectedResponse, opt => opt.Excluding(o => o.ErrorMessages));
+        }
+
+        [Fact]
+        public async void ReturnSuccessfulResponseWhenRepositoryAddCallIsSuccessful()
+        {
+            var messages = (List<Message>)MockServiceResults.GetMessagesSuccessResult();
+            var messageDtos = (List<MessageDto>) MockServiceResults.GetMessagesDtoSuccessResult();
+            var successResponse = messages.First();
+            var expectedResponse = new ServiceResponseDtos<MessageDto>.ServiceSuccessResponse(messageDtos.First());
+            _unitOfWork.Setup(x => x.MessageRepository.AddAsync(messages.First())).ReturnsAsync(successResponse);
+            _unitOfWork.Setup(x => x.SaveChangesAsync()).ReturnsAsync(true);
+            _mapper.Setup(x => x.Map<Message>(messageDtos.First())).Returns(messages.First());
+            _mapper.Setup(x => x.Map<MessageDto>(messages.First())).Returns(messageDtos.First());
+
+            var sut = new ContactService(_unitOfWork.Object, _mapper.Object);
+            var result = await sut.AddMessageAsync(messageDtos.First());
+
+            result.Should().BeEquivalentTo(expectedResponse);
         }
         #endregion
     }
