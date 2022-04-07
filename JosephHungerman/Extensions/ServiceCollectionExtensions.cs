@@ -1,9 +1,11 @@
-﻿using JosephHungerman.Data;
+﻿using System.Diagnostics.CodeAnalysis;
+using JosephHungerman.Data;
 using JosephHungerman.Data.Repositories;
 using Microsoft.EntityFrameworkCore;
 
 namespace JosephHungerman.Extensions
 {
+    [ExcludeFromCodeCoverage]
     public static class ServiceCollectionExtensions
     {
         public static IServiceCollection AddApplicationServices(this IServiceCollection services, IConfiguration configuration)
@@ -14,7 +16,7 @@ namespace JosephHungerman.Extensions
                     configuration.GetConnectionString("JshStage"),
                     new MariaDbServerVersion(new Version(10, 3)));
             });
-            services.AddSingleton<IUnitOfWork, UnitOfWork>();
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
             return services;
         }
     }
