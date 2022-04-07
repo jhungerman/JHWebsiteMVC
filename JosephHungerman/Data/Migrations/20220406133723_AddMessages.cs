@@ -1,10 +1,12 @@
-﻿using Microsoft.EntityFrameworkCore.Metadata;
+﻿using System.Diagnostics.CodeAnalysis;
+using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
 namespace JosephHungerman.Data.Migrations
 {
+    [ExcludeFromCodeCoverage]
     public partial class AddMessages : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
