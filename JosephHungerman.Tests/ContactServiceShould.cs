@@ -18,6 +18,7 @@ namespace JosephHungerman.Tests
     {
         private readonly Mock<IMapper> _mapper = new();
         private readonly Mock<IUnitOfWork> _unitOfWork = new();
+        private readonly Mock<IEmailService> _emailService = new();
 
         public ContactServiceShould()
         {
@@ -32,7 +33,7 @@ namespace JosephHungerman.Tests
             _unitOfWork.Setup(x => x.MessageRepository.GetAsync(It.IsAny<Expression<Func<Message, bool>>?>(),
                 It.IsAny<Func<IQueryable<Message>, IOrderedQueryable<Message>>?>(), It.IsAny<string>())).ReturnsAsync((List<Message>)null);
 
-            var sut = new ContactService(_unitOfWork.Object, _mapper.Object);
+            var sut = new ContactService(_unitOfWork.Object, _mapper.Object, _emailService.Object);
             var result = await sut.GetMessagesAsync();
 
             result.Should().BeEquivalentTo(expectedResponse);
@@ -45,7 +46,7 @@ namespace JosephHungerman.Tests
             _unitOfWork.Setup(x => x.MessageRepository.GetAsync(It.IsAny<Expression<Func<Message, bool>>?>(),
                 It.IsAny<Func<IQueryable<Message>, IOrderedQueryable<Message>>?>(), It.IsAny<string>())).ReturnsAsync(new List<Message>());
 
-            var sut = new ContactService(_unitOfWork.Object, _mapper.Object);
+            var sut = new ContactService(_unitOfWork.Object, _mapper.Object, _emailService.Object);
             var result = await sut.GetMessagesAsync();
 
             result.Should().BeEquivalentTo(expectedResponse);
@@ -61,7 +62,7 @@ namespace JosephHungerman.Tests
                 It.IsAny<Func<IQueryable<Message>, IOrderedQueryable<Message>>?>(), It.IsAny<string>())).ReturnsAsync(successResponse);
             _mapper.Setup(x => x.Map<List<MessageDto>>(successResponse)).Returns(messageDtos);
 
-            var sut = new ContactService(_unitOfWork.Object, _mapper.Object);
+            var sut = new ContactService(_unitOfWork.Object, _mapper.Object, _emailService.Object);
             var result = await sut.GetMessagesAsync();
 
             result.Should().BeEquivalentTo(expectedResponse);
@@ -75,7 +76,7 @@ namespace JosephHungerman.Tests
             _unitOfWork.Setup(x => x.MessageRepository.GetAsync(It.IsAny<Expression<Func<Message, bool>>?>(),
                 It.IsAny<Func<IQueryable<Message>, IOrderedQueryable<Message>>?>(), It.IsAny<string>())).ThrowsAsync(exception);
 
-            var sut = new ContactService(_unitOfWork.Object, _mapper.Object);
+            var sut = new ContactService(_unitOfWork.Object, _mapper.Object, _emailService.Object);
             var result = await sut.GetMessagesAsync();
 
             result.Should().BeEquivalentTo(expectedResponse, opt => opt.Excluding(o => o.ErrorMessages));
@@ -93,7 +94,7 @@ namespace JosephHungerman.Tests
             _unitOfWork.Setup(x => x.MessageRepository.AddAsync(messages.First())).ReturnsAsync((Message) null);
             _mapper.Setup(x => x.Map<Message>(messageDtos.First())).Returns(messages.First());
 
-            var sut = new ContactService(_unitOfWork.Object, _mapper.Object);
+            var sut = new ContactService(_unitOfWork.Object, _mapper.Object, _emailService.Object);
             var result = await sut.AddMessageAsync(messageDtos.First());
 
             result.Should().BeEquivalentTo(expectedResponse);
@@ -109,7 +110,7 @@ namespace JosephHungerman.Tests
             _unitOfWork.Setup(x => x.MessageRepository.AddAsync(messages.First())).ReturnsAsync(messages.First());
             _mapper.Setup(x => x.Map<Message>(messageDtos.First())).Returns(messages.First());
 
-            var sut = new ContactService(_unitOfWork.Object, _mapper.Object);
+            var sut = new ContactService(_unitOfWork.Object, _mapper.Object, _emailService.Object);
             var result = await sut.AddMessageAsync(messageDtos.First());
 
             result.Should().BeEquivalentTo(expectedResponse);
@@ -126,7 +127,7 @@ namespace JosephHungerman.Tests
             _mapper.Setup(x => x.Map<Message>(messageDtos.First())).Returns(messages.First());
             var message = _mapper.Object.Map<MessageDto>(messages.First());
 
-            var sut = new ContactService(_unitOfWork.Object, _mapper.Object);
+            var sut = new ContactService(_unitOfWork.Object, _mapper.Object, _emailService.Object);
             var result = await sut.AddMessageAsync(messageDtos.First());
 
             result.Should().BeEquivalentTo(expectedResponse, opt => opt.Excluding(o => o.ErrorMessages));
@@ -144,7 +145,7 @@ namespace JosephHungerman.Tests
             _mapper.Setup(x => x.Map<Message>(messageDtos.First())).Returns(messages.First());
             _mapper.Setup(x => x.Map<MessageDto>(messages.First())).Returns(messageDtos.First());
 
-            var sut = new ContactService(_unitOfWork.Object, _mapper.Object);
+            var sut = new ContactService(_unitOfWork.Object, _mapper.Object, _emailService.Object);
             var result = await sut.AddMessageAsync(messageDtos.First());
 
             result.Should().BeEquivalentTo(expectedResponse);

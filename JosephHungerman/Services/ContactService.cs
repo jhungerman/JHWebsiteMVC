@@ -1,7 +1,9 @@
 ﻿using AutoMapper;
+using JosephHungerman.Core.Options;
 using JosephHungerman.Data.Repositories;
 using JosephHungerman.Models;
 using JosephHungerman.Models.Dtos;
+using Microsoft.Extensions.Options;
 
 namespace JosephHungerman.Services
 {
@@ -9,11 +11,13 @@ namespace JosephHungerman.Services
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
+        private readonly IEmailService _emailService;
 
-        public ContactService(IUnitOfWork unitOfWork, IMapper mapper)
+        public ContactService(IUnitOfWork unitOfWork, IMapper mapper, IEmailService emailService)
         {
             _unitOfWork = unitOfWork;
             _mapper = mapper;
+            _emailService = emailService;
         }
 
         public async Task<ResponseDto> GetMessagesAsync()
@@ -39,6 +43,8 @@ namespace JosephHungerman.Services
         {
             try
             {
+                await _emailService.SendEmailAsync(message);
+
                 var newMessage = _mapper.Map<Message>(message);
 
                 var result = await _unitOfWork.MessageRepository.AddAsync(newMessage);
@@ -61,6 +67,11 @@ namespace JosephHungerman.Services
             {
                 return new ServiceResponseDtos<List<Message>>.ServiceExceptionResponse(e);
             }
+        }
+
+        public async Task<ResponseDto> SendEmail()
+        {
+            throw new NotImplementedException();
         }
     }
 }
