@@ -1,6 +1,6 @@
 ﻿namespace JosephHungerman.Core.Options
 {
-    public class Email
+    public class EmailSettings
     {
         public string Username { get; set; }
         public string Password { get; set; }

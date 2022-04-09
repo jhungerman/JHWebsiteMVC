@@ -68,10 +68,5 @@ namespace JosephHungerman.Services
                 return new ServiceResponseDtos<List<Message>>.ServiceExceptionResponse(e);
             }
         }
-
-        public async Task<ResponseDto> SendEmail()
-        {
-            throw new NotImplementedException();
-        }
     }
 }

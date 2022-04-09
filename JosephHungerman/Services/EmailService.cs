@@ -9,11 +9,13 @@ namespace JosephHungerman.Services
 {
     public class EmailService : IEmailService
     {
+        private readonly ISendGridClient _client;
         private readonly MailSettings _mailSettings;
-        private readonly Email _emailOptions;
+        private readonly EmailSettings _emailOptions;
 
-        public EmailService(IOptions<MailSettings> mailSettings, IOptions<Email> emailOptions)
+        public EmailService(IOptions<MailSettings> mailSettings, IOptions<EmailSettings> emailOptions, ISendGridClient client)
         {
+            _client = client;
             _mailSettings = mailSettings.Value;
             _emailOptions = emailOptions.Value;
         }
@@ -22,19 +24,17 @@ namespace JosephHungerman.Services
         {
             try
             {
-                var client = new SendGridClient(_emailOptions.ApiKey);
-
                 var from = new EmailAddress(_mailSettings.Mail);
                 var to = new EmailAddress(_mailSettings.ToMail);
                 var subject = "You have a new contact request from JosephHungerman.com";
                 var textContent =
                     $@"{message.FirstName}{Environment.NewLine}{message.LastName}{Environment.NewLine}{message.Email}{Environment.NewLine}{message.Subject}{Environment.NewLine}{message.Detail}";
                 var msg = MailHelper.CreateSingleEmail(from, to, subject, textContent, "");
-                var response = await client.SendEmailAsync(msg);
+                var response = await _client.SendEmailAsync(msg);
 
                 var deserialized = await response.DeserializeResponseBodyAsync();
 
-                if (response is {IsSuccessStatusCode: true})
+                if (response is { IsSuccessStatusCode: true })
                 {
                     return new ServiceResponseDtos<Dictionary<string, dynamic>>.ServiceSuccessResponse(deserialized);
                 }
@@ -43,8 +43,7 @@ namespace JosephHungerman.Services
             }
             catch (Exception e)
             {
-                Console.WriteLine(e);
-                throw;
+                return new ServiceResponseDtos<SendGridMessage>.ServiceExceptionResponse(e);
             }
         }
     }

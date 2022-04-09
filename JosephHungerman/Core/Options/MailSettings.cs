@@ -2,9 +2,9 @@
 {
     public class MailSettings
     {
-        public string Mail { get; set; }
-        public string ToMail { get; set; }
-        public string Host { get; set; }
-        public int Port { get; set; }
+        public virtual string Mail { get; set; }
+        public virtual string ToMail { get; set; }
+        public virtual string Host { get; set; }
+        public virtual int Port { get; set; }
     }
 }
