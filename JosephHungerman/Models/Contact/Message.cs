@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace JosephHungerman.Models
+namespace JosephHungerman.Models.Contact
 {
     public class Message : BaseEntity
     {

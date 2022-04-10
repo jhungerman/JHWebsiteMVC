@@ -6,6 +6,7 @@ using AutoMapper;
 using FluentAssertions;
 using JosephHungerman.Data.Repositories;
 using JosephHungerman.Models;
+using JosephHungerman.Models.Contact;
 using JosephHungerman.Models.Dtos;
 using JosephHungerman.Services;
 using JosephHungerman.Tests.Models;

@@ -1,6 +1,7 @@
 ﻿using JosephHungerman.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
+using JosephHungerman.Models.ViewModels;
 
 namespace JosephHungerman.Controllers
 {

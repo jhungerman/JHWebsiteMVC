@@ -1,4 +1,4 @@
-namespace JosephHungerman.Models
+namespace JosephHungerman.Models.ViewModels
 {
     public class ErrorViewModel
     {

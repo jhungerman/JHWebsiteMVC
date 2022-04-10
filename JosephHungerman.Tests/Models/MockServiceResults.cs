@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using JosephHungerman.Models;
+using JosephHungerman.Models.Contact;
 using JosephHungerman.Models.Dtos;
 
 namespace JosephHungerman.Tests.Models

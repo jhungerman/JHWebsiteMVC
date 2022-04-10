@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using JosephHungerman.Models;
+using JosephHungerman.Models.Contact;
 using JosephHungerman.Models.Dtos;
 
 namespace JosephHungerman.Helpers

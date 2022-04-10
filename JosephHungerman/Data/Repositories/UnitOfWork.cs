@@ -1,4 +1,5 @@
 ﻿using JosephHungerman.Models;
+using JosephHungerman.Models.Contact;
 
 namespace JosephHungerman.Data.Repositories
 {
