@@ -1,4 +1,5 @@
 ﻿using System.Diagnostics.CodeAnalysis;
+using AspNetCore.ReCaptcha;
 using JosephHungerman.Core.Options;
 using JosephHungerman.Data;
 using JosephHungerman.Data.Repositories;
@@ -32,9 +33,11 @@ namespace JosephHungerman.Extensions
                     configuration.GetConnectionString("JshStage"),
                     new MariaDbServerVersion(new Version(10, 3)));
             });
+            services.AddReCaptcha(configuration.GetSection("Captcha"));
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddScoped<IContactService, ContactService>();
             services.AddScoped<IEmailService, EmailService>();
+            services.AddScoped<ICaptchaService, CaptchaService>();
             return services;
         }
     }

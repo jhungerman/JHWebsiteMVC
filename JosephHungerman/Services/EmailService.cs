@@ -11,13 +11,11 @@ namespace JosephHungerman.Services
     {
         private readonly ISendGridClient _client;
         private readonly MailSettings _mailSettings;
-        private readonly EmailSettings _emailOptions;
 
-        public EmailService(IOptions<MailSettings> mailSettings, IOptions<EmailSettings> emailOptions, ISendGridClient client)
+        public EmailService(IOptions<MailSettings> mailSettings, ISendGridClient client)
         {
             _client = client;
             _mailSettings = mailSettings.Value;
-            _emailOptions = emailOptions.Value;
         }
 
         public async Task<ResponseDto> SendEmailAsync(MessageDto message)

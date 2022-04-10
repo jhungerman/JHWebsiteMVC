@@ -52,7 +52,7 @@ namespace JosephHungerman.Tests
                 Subject = "Hi",
                 Detail = "This is a unit test."
             };
-            _sut = new EmailService(_mailSettings, _emailOptions, _client.Object);
+            _sut = new EmailService(_mailSettings, _client.Object);
         }
 
         [Fact]
