@@ -10,16 +10,12 @@ namespace JosephHungerman.Models.Work
         [Required]
         public string Summary { get; set; }
         [Required]
-        [ForeignKey("WorkExperienceId")]
-        IList<WorkExperience> WorkExperiences { get; set; }
+        public IList<WorkExperience> WorkExperiences { get; set; };
         [Required]
-        [ForeignKey("EducationId")]
-        IList<Education> Educations { get; set; }
+        public IList<Education> Educations { get; set; }
         [Required]
-        [ForeignKey("SkillId")]
-        IList<Skill> Skills { get; set; }
+        public IList<Skill> Skills { get; set; }
         [Required]
-        [ForeignKey("CertificationId")]
-        IList<Certification> Certifications { get; set; }
+        public IList<Certification> Certifications { get; set; }
     }
 }

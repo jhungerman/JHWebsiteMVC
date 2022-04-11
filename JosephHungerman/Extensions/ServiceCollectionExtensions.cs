@@ -38,6 +38,11 @@ namespace JosephHungerman.Extensions
             services.AddScoped<IContactService, ContactService>();
             services.AddScoped<IEmailService, EmailService>();
             services.AddScoped<ICaptchaService, CaptchaService>();
+            services.AddScoped<DbInitializer>();
+
+            using var dbinit = services.BuildServiceProvider().GetRequiredService<ApplicationDbContext>();
+            DbInitializer.SeedResumeData(dbinit).Wait();
+
             return services;
         }
     }

@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace JosephHungerman.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20220410114931_AddedResumeInfo")]
-    partial class AddedResumeInfo
+    [Migration("20220411083611_InitialMigration")]
+    partial class InitialMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -64,6 +64,9 @@ namespace JosephHungerman.Data.Migrations
                     b.Property<DateTime?>("EndDate")
                         .HasColumnType("datetime(6)");
 
+                    b.Property<int>("ResumeId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Source")
                         .IsRequired()
                         .HasColumnType("longtext");
@@ -79,6 +82,8 @@ namespace JosephHungerman.Data.Migrations
                         .HasColumnType("longtext");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("ResumeId");
 
                     b.ToTable("Certifications");
                 });
@@ -103,7 +108,12 @@ namespace JosephHungerman.Data.Migrations
                     b.Property<string>("InstitutionUrl")
                         .HasColumnType("longtext");
 
+                    b.Property<int>("ResumeId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("ResumeId");
 
                     b.ToTable("Educations");
                 });
@@ -133,10 +143,6 @@ namespace JosephHungerman.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<string>("Class")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
                     b.Property<bool>("IsKeySkill")
                         .HasColumnType("tinyint(1)");
 
@@ -144,10 +150,15 @@ namespace JosephHungerman.Data.Migrations
                         .IsRequired()
                         .HasColumnType("longtext");
 
+                    b.Property<int>("ResumeId")
+                        .HasColumnType("int");
+
                     b.Property<int>("SkillType")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("ResumeId");
 
                     b.ToTable("Skills");
                 });
@@ -162,7 +173,12 @@ namespace JosephHungerman.Data.Migrations
                         .IsRequired()
                         .HasColumnType("longtext");
 
+                    b.Property<int>("WorkExperienceId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("WorkExperienceId");
 
                     b.ToTable("WorkDetails");
                 });
@@ -181,15 +197,18 @@ namespace JosephHungerman.Data.Migrations
                         .IsRequired()
                         .HasColumnType("longtext");
 
-                    b.Property<string>("CompanyUrl")
+                    b.Property<string>("CompanyState")
+                        .IsRequired()
                         .HasColumnType("longtext");
 
-                    b.Property<string>("ConpanyState")
-                        .IsRequired()
+                    b.Property<string>("CompanyUrl")
                         .HasColumnType("longtext");
 
                     b.Property<DateTime?>("EndDate")
                         .HasColumnType("datetime(6)");
+
+                    b.Property<int>("ResumeId")
+                        .HasColumnType("int");
 
                     b.Property<DateTime>("StartDate")
                         .HasColumnType("datetime(6)");
@@ -200,7 +219,80 @@ namespace JosephHungerman.Data.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("ResumeId");
+
                     b.ToTable("WorkExperiences");
+                });
+
+            modelBuilder.Entity("JosephHungerman.Models.Work.Certification", b =>
+                {
+                    b.HasOne("JosephHungerman.Models.Work.Resume", "Resume")
+                        .WithMany("Certifications")
+                        .HasForeignKey("ResumeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Resume");
+                });
+
+            modelBuilder.Entity("JosephHungerman.Models.Work.Education", b =>
+                {
+                    b.HasOne("JosephHungerman.Models.Work.Resume", "Resume")
+                        .WithMany("Educations")
+                        .HasForeignKey("ResumeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Resume");
+                });
+
+            modelBuilder.Entity("JosephHungerman.Models.Work.Skill", b =>
+                {
+                    b.HasOne("JosephHungerman.Models.Work.Resume", "Resume")
+                        .WithMany("Skills")
+                        .HasForeignKey("ResumeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Resume");
+                });
+
+            modelBuilder.Entity("JosephHungerman.Models.Work.WorkDetail", b =>
+                {
+                    b.HasOne("JosephHungerman.Models.Work.WorkExperience", "WorkExperience")
+                        .WithMany("WorkDetails")
+                        .HasForeignKey("WorkExperienceId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("WorkExperience");
+                });
+
+            modelBuilder.Entity("JosephHungerman.Models.Work.WorkExperience", b =>
+                {
+                    b.HasOne("JosephHungerman.Models.Work.Resume", "Resume")
+                        .WithMany("WorkExperiences")
+                        .HasForeignKey("ResumeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Resume");
+                });
+
+            modelBuilder.Entity("JosephHungerman.Models.Work.Resume", b =>
+                {
+                    b.Navigation("Certifications");
+
+                    b.Navigation("Educations");
+
+                    b.Navigation("Skills");
+
+                    b.Navigation("WorkExperiences");
+                });
+
+            modelBuilder.Entity("JosephHungerman.Models.Work.WorkExperience", b =>
+                {
+                    b.Navigation("WorkDetails");
                 });
 #pragma warning restore 612, 618
         }

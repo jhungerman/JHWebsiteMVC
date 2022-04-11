@@ -10,5 +10,7 @@ namespace JosephHungerman.Models.Work
         public string? CredentialId { get; set; }
         [Required] public DateTime StartDate { get; set; }
         public DateTime? EndDate { get; set; }
+        public int ResumeId { get; set; }
+        public Resume Resume { get; set; }
     }
 }

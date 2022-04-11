@@ -9,5 +9,7 @@ namespace JosephHungerman.Models.Work
         [Required] public string Credential { get; set; }
         [Required] public DateTime EndDate { get; set; }
         public string? InstitutionUrl { get; set; }
+        public int ResumeId { get; set; }
+        public Resume Resume { get; set; }
     }
 }
