@@ -10,7 +10,7 @@ namespace JosephHungerman.Models.Work
         [Required]
         public string Summary { get; set; }
         [Required]
-        public IList<WorkExperience> WorkExperiences { get; set; };
+        public IList<WorkExperience> WorkExperiences { get; set; }
         [Required]
         public IList<Education> Educations { get; set; }
         [Required]
