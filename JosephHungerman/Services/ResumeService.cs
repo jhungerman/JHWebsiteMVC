@@ -19,7 +19,7 @@ public class ResumeService : IResumeService
         {
             var resumes = await _unitOfWork.ResumeRepository.GetAsync(
                 includeProperties:
-                $"{nameof(Resume.WorkExperiences)},{nameof(Resume.Educations)},{nameof(Resume.Skills)},{nameof(Resume.Certifications)}");
+                $"{nameof(Resume.WorkExperiences)},{nameof(Resume.Educations)},{nameof(Resume.Skills)},{nameof(Resume.Certifications)},{nameof(Resume.WorkExperiences)}.{nameof(WorkExperience.WorkDetails)}");
 
             if (resumes == null || !resumes.Any())
             {
