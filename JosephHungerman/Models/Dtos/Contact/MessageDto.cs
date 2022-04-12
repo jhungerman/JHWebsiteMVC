@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace JosephHungerman.Models.Dtos
+namespace JosephHungerman.Models.Dtos.Contact
 {
     public class MessageDto
     {

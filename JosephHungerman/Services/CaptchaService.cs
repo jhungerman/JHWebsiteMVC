@@ -1,6 +1,7 @@
 ﻿using System.Text.Json;
 using JosephHungerman.Core.Options;
 using JosephHungerman.Models;
+using JosephHungerman.Models.Contact;
 using Microsoft.Extensions.Options;
 
 namespace JosephHungerman.Services;

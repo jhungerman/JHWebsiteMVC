@@ -7,6 +7,7 @@ using System.Threading;
 using FluentAssertions;
 using JosephHungerman.Core.Options;
 using JosephHungerman.Models.Dtos;
+using JosephHungerman.Models.Dtos.Contact;
 using JosephHungerman.Services;
 using Microsoft.Extensions.Options;
 using Moq;

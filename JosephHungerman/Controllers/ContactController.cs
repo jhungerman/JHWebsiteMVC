@@ -1,5 +1,7 @@
-﻿using JosephHungerman.Models;
+﻿using JosephHungerman.Models.Contact;
 using JosephHungerman.Models.Dtos;
+using JosephHungerman.Models.Dtos.Contact;
+using JosephHungerman.Models.ViewModels;
 using JosephHungerman.Services;
 using Microsoft.AspNetCore.Mvc;
 

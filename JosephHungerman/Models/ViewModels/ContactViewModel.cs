@@ -1,4 +1,6 @@
-﻿namespace JosephHungerman.Models
+﻿using JosephHungerman.Models.Contact;
+
+namespace JosephHungerman.Models.ViewModels
 {
     public class ContactViewModel
     {

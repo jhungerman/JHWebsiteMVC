@@ -24,10 +24,10 @@
                     <div>
                         <ul class="navbar-nav flex-grow-1">
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                                <a class="nav-link text-dark" asp-controller="Home" asp-action="Index">Home</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="About">About</a>
+                                <a class="nav-link text-dark" asp-controller="Home" asp-action="About">About</a>
                             </li>
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false" asp-area="" asp-controller="Home" asp-action="Work">
@@ -36,18 +36,18 @@
                                 <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                                     <li>
                                         <div>
-                                            <a class="dropdown-item text-black" href="#"><i class="fas fa-file me-2"></i><span>Resume</span></a>
+                                            <a class="dropdown-item text-black" asp-controller="Work" asp-action="Resume"><i class="fas fa-file me-2"></i><span>Resume</span></a>
                                         </div>
                                     </li>
-                                    <li><a class="dropdown-item text-black" href="#"><img src="~/img/devops.png" class="img-fluid me-1" id="devops" />Azure Repos</a></li>
-                                    <li><a class="dropdown-item text-black" href="#"><i class="fa-brands fa-github me-1"></i>GitHub Repos</a></li>
+                                    <li hidden><a class="dropdown-item text-black" href="#"><img src="~/img/devops.png" class="img-fluid me-1" id="devops" />Azure Repos</a></li>
+                                    <li><a class="dropdown-item text-black" href="https://github.com/jhungerman" target="_blank"><i class="fa-brands fa-github me-1"></i>GitHub Repos</a></li>
                                 </ul>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Contact" asp-action="Contact">Contact</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Blog">Blog</a>
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Blog" hidden>Blog</a>
                             </li>
                         </ul>
                     </div>

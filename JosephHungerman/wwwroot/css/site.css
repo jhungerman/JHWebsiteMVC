@@ -26,7 +26,31 @@ footer {
     font-family: "Courier New";
 }
 
+.hr-bold {
+    border: 2px solid #000000;
+    margin: 0;
+}
+
 #devops {
     max-height: 15px;
 }
 
+#divider-container {
+    border-radius: 0.25rem;
+    overflow: hidden;
+}
+
+#divider {
+    background-color: #EAF1DD;
+    height: 20px;
+    border-top: 2px solid black;
+    border-bottom: 2px solid black;
+}
+
+
+/*Media Queries*/
+@media only screen and (max-width: 360px) {
+    #credentialLabel {
+        display: none;
+    }
+}

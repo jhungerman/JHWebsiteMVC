@@ -1,3 +1,4 @@
+using System.Text.Json;
 using JosephHungerman.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -11,7 +12,11 @@ var builder = WebApplication.CreateBuilder(args);
 //});
 
 // Add services to the container.
-builder.Services.AddControllersWithViews();
+builder.Services.AddControllersWithViews().AddJsonOptions(options =>
+{
+    options.JsonSerializerOptions.PropertyNameCaseInsensitive = true;
+    options.JsonSerializerOptions.PropertyNamingPolicy = JsonNamingPolicy.CamelCase;
+});
 builder.Services.AddApplicationServices(builder.Configuration);
 
 //var endpoint = new Uri(Environment.GetEnvironmentVariable("KV_URI") ?? string.Empty);

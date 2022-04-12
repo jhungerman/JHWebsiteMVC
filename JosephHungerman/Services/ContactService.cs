@@ -2,7 +2,9 @@
 using JosephHungerman.Core.Options;
 using JosephHungerman.Data.Repositories;
 using JosephHungerman.Models;
+using JosephHungerman.Models.Contact;
 using JosephHungerman.Models.Dtos;
+using JosephHungerman.Models.Dtos.Contact;
 using Microsoft.Extensions.Options;
 
 namespace JosephHungerman.Services
