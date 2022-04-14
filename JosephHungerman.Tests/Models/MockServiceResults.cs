@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using JosephHungerman.Models;
+using JosephHungerman.Models.About;
 using JosephHungerman.Models.Contact;
 using JosephHungerman.Models.Dtos;
 using JosephHungerman.Models.Dtos.Contact;
@@ -103,6 +104,51 @@ namespace JosephHungerman.Tests.Models
                         EndDate = DateTime.Today.AddDays(-730),
                     }
                 }
+            };
+        }
+
+        public static object GetSectionsSuccessResult()
+        {
+            return new List<Section>
+            {
+                new()
+                {
+                    Id = 1,
+                    Title = "section1",
+                    Paragraphs = new List<Paragraph>
+                    {
+                        new()
+                        {
+                            Id = 1,
+                            Content = "content"
+                        }
+                    }
+                },
+                new()
+                {
+                    Id = 2,
+                    Title = "section2",
+                    Paragraphs = new List<Paragraph>
+                    {
+                        new()
+                        {
+                            Id = 2,
+                            Content = "content"
+                        }
+                    }
+                }
+            };
+        }
+
+        public static object GetQuoteSuccessResult()
+        {
+            return new Quote
+            {
+                Id = 1,
+                PageType = PageType.Home,
+                Text = "testtext",
+                Author = "randomauthor",
+                CitationUrl = "https://www.quote.com"
             };
         }
     }

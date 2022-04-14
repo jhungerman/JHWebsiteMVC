@@ -1,6 +1,7 @@
 ﻿using JosephHungerman.Core.Options;
 using JosephHungerman.Models.Dtos;
 using JosephHungerman.Models.Dtos.Contact;
+using JosephHungerman.Services.Interfaces;
 using Microsoft.Extensions.Options;
 using SendGrid;
 using SendGrid.Helpers.Mail;

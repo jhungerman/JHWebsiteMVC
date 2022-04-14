@@ -1,6 +1,7 @@
 ﻿using JosephHungerman.Data.Repositories;
 using JosephHungerman.Models;
 using JosephHungerman.Models.Dtos;
+using JosephHungerman.Services.Interfaces;
 
 namespace JosephHungerman.Services;
 

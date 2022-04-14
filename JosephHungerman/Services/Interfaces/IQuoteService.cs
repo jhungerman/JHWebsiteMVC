@@ -1,7 +1,7 @@
 ﻿using JosephHungerman.Models;
 using JosephHungerman.Models.Dtos;
 
-namespace JosephHungerman.Services;
+namespace JosephHungerman.Services.Interfaces;
 
 public interface IQuoteService
 {

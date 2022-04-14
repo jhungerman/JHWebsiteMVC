@@ -8,6 +8,8 @@ namespace JosephHungerman.Data.Repositories
         Task<IList<TEntity>?> GetAsync(Expression<Func<TEntity, bool>>? filter = null,
             Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>>? orderBy = null,
             string includeProperties = "");
+        Task<TEntity?> GetFirstAsync(Expression<Func<TEntity, bool>>? filter = null,
+            string includeProperties = "");
         Task<TEntity?> GetByIdAsync(object id);
         Task<IList<TEntity>?> AddAllAsync(IList<TEntity> models);
         Task<TEntity?> AddAsync(TEntity model);

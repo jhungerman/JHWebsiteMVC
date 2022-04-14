@@ -4,6 +4,7 @@ using JosephHungerman.Models.Dtos;
 using JosephHungerman.Models.Dtos.Contact;
 using JosephHungerman.Models.ViewModels;
 using JosephHungerman.Services;
+using JosephHungerman.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace JosephHungerman.Controllers

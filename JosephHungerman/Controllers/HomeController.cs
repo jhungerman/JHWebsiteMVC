@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 using JosephHungerman.Models.ViewModels;
 using JosephHungerman.Services;
+using JosephHungerman.Services.Interfaces;
 
 namespace JosephHungerman.Controllers
 {
@@ -31,17 +32,6 @@ namespace JosephHungerman.Controllers
         public IActionResult Privacy()
         {
             return View();
-        }
-
-        public async Task<IActionResult> About()
-        {
-            var response = await _quoteService.GetPageQuoteAsync(PageType.About);
-            if (response.IsSuccess)
-            {
-                return View(new HomeViewModel { Quote = (Quote)response.Result! });
-            }
-
-            return RedirectToAction(nameof(Error));
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

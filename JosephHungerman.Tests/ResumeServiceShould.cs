@@ -31,8 +31,8 @@ public class ResumeServiceShould
         var exception = new Exception();
         var expectedResponse = new ServiceResponseDtos<Resume>.ServiceExceptionResponse(exception);
 
-        _unitOfWork.Setup(x => x.ResumeRepository.GetAsync(It.IsAny<Expression<Func<Resume, bool>>?>(),
-                It.IsAny<Func<IQueryable<Resume>, IOrderedQueryable<Resume>>?>(), It.IsAny<string>()))
+        _unitOfWork.Setup(x => x.ResumeRepository.GetFirstAsync(It.IsAny<Expression<Func<Resume, bool>>?>(),
+                It.IsAny<string>()))
             .ThrowsAsync(exception);
 
         var response = await _sut.GetResumeDetailsAsync();
@@ -71,15 +71,14 @@ public class ResumeServiceShould
     }
 
     [Fact]
-    public async void ReturnSuccssfulResponseWhenGetResumeDetailsDataCallIsSuccessful()
+    public async void ReturnSuccessfulResponseWhenGetResumeDetailsDataCallIsSuccessful()
     {
         Resume resume = (Resume)MockServiceResults.GetResumeSuccessResult();
         var expectedResponse = new ServiceResponseDtos<Resume>.ServiceSuccessResponse(resume);
-        List<Resume> resumeList = new() {resume};
 
-        _unitOfWork.Setup(x => x.ResumeRepository.GetAsync(It.IsAny<Expression<Func<Resume, bool>>?>(),
-                It.IsAny<Func<IQueryable<Resume>, IOrderedQueryable<Resume>>?>(), It.IsAny<string>()))
-            .ReturnsAsync(resumeList);
+        _unitOfWork.Setup(x => x.ResumeRepository.GetFirstAsync(It.IsAny<Expression<Func<Resume, bool>>?>(),
+                It.IsAny<string>()))
+            .ReturnsAsync(resume);
 
         var response = await _sut.GetResumeDetailsAsync();
 

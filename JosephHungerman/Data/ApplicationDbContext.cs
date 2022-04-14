@@ -1,6 +1,7 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 using System.Text.Json;
 using JosephHungerman.Models;
+using JosephHungerman.Models.About;
 using JosephHungerman.Models.Contact;
 using JosephHungerman.Models.Work;
 using Microsoft.EntityFrameworkCore;
@@ -23,5 +24,7 @@ namespace JosephHungerman.Data
         public DbSet<Skill> Skills { get; set; }
         public DbSet<Certification> Certifications { get; set; }
         public DbSet<Quote> Quotes { get; set; }
+        public DbSet<Section> Sections { get; set; }
+        public DbSet<Paragraph> Paragraphs { get; set; }
     }
 }
