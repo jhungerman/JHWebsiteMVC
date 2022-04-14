@@ -5,7 +5,6 @@ using System.Linq.Expressions;
 using FluentAssertions;
 using JosephHungerman.Data.Repositories;
 using JosephHungerman.Models;
-using JosephHungerman.Models.About;
 using JosephHungerman.Models.Dtos;
 using JosephHungerman.Services;
 using JosephHungerman.Tests.Models;

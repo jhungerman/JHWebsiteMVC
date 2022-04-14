@@ -1,12 +1,9 @@
 ﻿using AutoMapper;
-using JosephHungerman.Core.Options;
 using JosephHungerman.Data.Repositories;
-using JosephHungerman.Models;
 using JosephHungerman.Models.Contact;
 using JosephHungerman.Models.Dtos;
 using JosephHungerman.Models.Dtos.Contact;
 using JosephHungerman.Services.Interfaces;
-using Microsoft.Extensions.Options;
 
 namespace JosephHungerman.Services
 {

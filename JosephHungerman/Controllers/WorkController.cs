@@ -1,9 +1,7 @@
 ﻿using JosephHungerman.Models;
 using JosephHungerman.Models.ViewModels;
 using JosephHungerman.Models.Work;
-using JosephHungerman.Services;
 using JosephHungerman.Services.Interfaces;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace JosephHungerman.Controllers

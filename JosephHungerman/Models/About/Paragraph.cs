@@ -1,6 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
-
-namespace JosephHungerman.Models.About
+﻿namespace JosephHungerman.Models.About
 {
     public class Paragraph : BaseEntity, IEntity
     {
