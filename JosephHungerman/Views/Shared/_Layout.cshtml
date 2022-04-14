@@ -7,7 +7,6 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/lib/font-awesome/css/all.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/JosephHungerman.styles.css" asp-append-version="true" />
 </head>
 <body>
     <header>
@@ -30,7 +29,7 @@
                                 <a class="nav-link text-dark" asp-controller="About" asp-action="About">About</a>
                             </li>
                             <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false" asp-area="" asp-controller="Home" asp-action="Work">
+                                <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                     Work
                                 </a>
                                 <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
@@ -46,10 +45,10 @@
                             <li class="nav-item">
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Contact" asp-action="Contact">Contact</a>
                             </li>
-                            <li class="nav-item">
+@*                            <li class="nav-item">
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Blog" hidden>Blog</a>
                             </li>
-                        </ul>
+*@                        </ul>
                     </div>
                     <div>
                         <form method="post" class="d-flex">
