@@ -1,4 +1,5 @@
 ﻿using JosephHungerman.Models;
+using JosephHungerman.Models.About;
 using JosephHungerman.Models.Contact;
 using JosephHungerman.Models.Work;
 
@@ -10,6 +11,7 @@ namespace JosephHungerman.Data.Repositories
         private IRepository<Message>? _messageRepository;
         private IRepository<Resume>? _resumeRepository;
         private IRepository<Quote>? _quoteRepository;
+        private IRepository<Section>? _sectionRepository;
 
         public UnitOfWork(ApplicationDbContext context)
         {
@@ -19,6 +21,7 @@ namespace JosephHungerman.Data.Repositories
         public IRepository<Message> MessageRepository => _messageRepository ??= new Repository<Message>(_context);
         public IRepository<Resume> ResumeRepository => _resumeRepository ??= new Repository<Resume>(_context);
         public IRepository<Quote> QuoteRepository => _quoteRepository ??= new Repository<Quote>(_context);
+        public IRepository<Section> SectionRepository => _sectionRepository ??= new Repository<Section>(_context);
 
         public async Task<bool> SaveChangesAsync()
         {
