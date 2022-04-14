@@ -22,7 +22,6 @@ namespace JosephHungerman.Tests
     {
         private readonly SendGridMessage _message;
         private readonly IOptions<MailSettings> _mailSettings;
-        private readonly IOptions<EmailSettings> _emailOptions;
         private readonly MessageDto _messageDto;
         private readonly Mock<ISendGridClient> _client = new();
         private readonly Mock<Func<Response>> _response = new();
@@ -38,12 +37,6 @@ namespace JosephHungerman.Tests
                 ToMail = "test@gmail.com",
                 Host = "smtp@gmail.com",
                 Port = 587
-            });
-            _emailOptions = Options.Create(new EmailSettings
-            {
-                Username = "Joe",
-                Password = "Mypassword",
-                ApiKey = "thisisanapikey"
             });
             _messageDto = new()
             {

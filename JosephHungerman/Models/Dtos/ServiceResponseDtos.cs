@@ -26,7 +26,7 @@
         }
         public class ServiceNotFoundExceptionResponse : ResponseDto
         {
-            public ServiceNotFoundExceptionResponse(Exception? e = null)
+            public ServiceNotFoundExceptionResponse()
             {
                 IsSuccess = false;
                 DisplayMessage = string.Empty;
