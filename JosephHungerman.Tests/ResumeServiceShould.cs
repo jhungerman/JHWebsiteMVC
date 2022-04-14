@@ -20,7 +20,7 @@ public class ResumeServiceShould
 
     public ResumeServiceShould()
     {
-        _sut = new ResumeService(_unitOfWork.Object);
+        _sut = new(_unitOfWork.Object);
     }
 
     #region GetResumeDetailsAsync

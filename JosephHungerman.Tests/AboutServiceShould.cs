@@ -20,7 +20,7 @@ public class AboutServiceShould
 
     public AboutServiceShould()
     {
-        _sut = new AboutService(_unitOfWork.Object);
+        _sut = new(_unitOfWork.Object);
     }
 
     #region GetSections
@@ -58,7 +58,7 @@ public class AboutServiceShould
     [Fact]
     public async void ReturnNotFoundExceptionWhenGetAsyncReturnsEmptyList()
     {
-        List<Section> sections = new List<Section>();
+        List<Section> sections = new();
         var expectedResponse = new ServiceResponseDtos<List<Section>>.ServiceNotFoundExceptionResponse();
 
         _unitOfWork.Setup(x => x.SectionRepository.GetAsync(It.IsAny<Expression<Func<Section, bool>>?>(),

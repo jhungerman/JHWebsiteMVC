@@ -30,7 +30,7 @@ namespace JosephHungerman.Tests
 
         public EmailServiceShould()
         {
-            _message = MailHelper.CreateSingleEmail(new EmailAddress("joe@joe.com"), new EmailAddress("ash@ash.com"),
+            _message = MailHelper.CreateSingleEmail(new("joe@joe.com"), new("ash@ash.com"),
                 "Hi", "Test", "");
             _mailSettings = Options.Create(new MailSettings
             {
@@ -45,7 +45,7 @@ namespace JosephHungerman.Tests
                 Password = "Mypassword",
                 ApiKey = "thisisanapikey"
             });
-            _messageDto = new MessageDto
+            _messageDto = new()
             {
                 FirstName = "Joe",
                 LastName = "H",

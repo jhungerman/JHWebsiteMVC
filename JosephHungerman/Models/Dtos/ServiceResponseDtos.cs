@@ -20,7 +20,7 @@
                 IsSuccess = false;
                 DisplayMessage = string.Empty;
                 ErrorResponseType = Dtos.ErrorResponseType.Exception;
-                ErrorMessages = new List<string> { e.ToString() };
+                ErrorMessages = new() { e.ToString() };
                 Result = null;
             }
         }
@@ -31,7 +31,7 @@
                 IsSuccess = false;
                 DisplayMessage = string.Empty;
                 ErrorResponseType = Dtos.ErrorResponseType.NotFound;
-                ErrorMessages = new List<string> { "NOT FOUND" };
+                ErrorMessages = new() { "NOT FOUND" };
                 Result = null;
             }
         }
@@ -42,7 +42,7 @@
                 IsSuccess = false;
                 DisplayMessage = string.Empty;
                 ErrorResponseType = Dtos.ErrorResponseType.Database;
-                ErrorMessages = new List<string> { "Database exception", "Please try again later" };
+                ErrorMessages = new() { "Database exception", "Please try again later" };
                 Result = null;
             }
         }
@@ -53,7 +53,7 @@
                 IsSuccess = false;
                 DisplayMessage = string.Empty;
                 ErrorResponseType = Dtos.ErrorResponseType.BadRequest;
-                ErrorMessages = e == null ? new List<string> { "Bad request" } : new List<string> { e.ToString() };
+                ErrorMessages = e == null ? new() { "Bad request" } : new List<string> { e.ToString() };
                 Result = null;
             }
         }

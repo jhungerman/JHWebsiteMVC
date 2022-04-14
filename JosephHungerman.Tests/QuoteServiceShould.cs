@@ -20,7 +20,7 @@ public class QuoteServiceShould
 
     public QuoteServiceShould()
     {
-        _sut = new QuoteService(_unitOfWork.Object);
+        _sut = new(_unitOfWork.Object);
     }
 
     #region GetPageQuote
