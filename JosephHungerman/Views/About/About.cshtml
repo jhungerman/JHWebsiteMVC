@@ -1,0 +1,5 @@
+﻿@model JosephHungerman.Models.ViewModels.AboutViewModel
+
+@section Quotes {
+    @await Html.PartialAsync("_QuotePartial", Model.Quote)
+}

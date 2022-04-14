@@ -34,17 +34,6 @@ namespace JosephHungerman.Controllers
             return View();
         }
 
-        public async Task<IActionResult> About()
-        {
-            var response = await _quoteService.GetPageQuoteAsync(PageType.About);
-            if (response.IsSuccess)
-            {
-                return View(new HomeViewModel { Quote = (Quote)response.Result! });
-            }
-
-            return RedirectToAction(nameof(Error));
-        }
-
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {

@@ -42,4 +42,12 @@
     <Folder Include="Models\Dtos\Work\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <UpToDateCheckInput Remove="Views\About\About.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <_ContentIncludedByDefault Remove="Views\About\About.cshtml" />
+  </ItemGroup>
+
 </Project>
