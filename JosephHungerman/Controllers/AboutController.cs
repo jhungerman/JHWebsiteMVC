@@ -19,29 +19,15 @@ namespace JosephHungerman.Controllers
 
         public async Task<IActionResult> About()
         {
-            //var sectionResponse = await _aboutService.GetSectionsAsync();
+            var sectionResponse = await _aboutService.GetSectionsAsync();
             var quoteResponse = await _quoteService.GetPageQuoteAsync(PageType.About);
 
-            if (/*sectionResponse.IsSuccess && */quoteResponse.IsSuccess)
+            if (sectionResponse.IsSuccess && quoteResponse.IsSuccess)
             {
                 var model = new AboutViewModel
                 {
                     Quote = (Quote) quoteResponse.Result!,
-                    Sections = new List<Section>
-                    {
-                        new Section
-                        {
-                            Id = 1,
-                            Title = "Hi",
-                            Paragraphs = new List<Paragraph> {new Paragraph
-                                {
-                                    Id = 1,
-                                    Content = "content",
-                                }
-                            }
-                        }
-                    }
-                    //Sections = (List<Section>) sectionResponse.Result!
+                    Sections = (List<Section>) sectionResponse.Result!
                 };
 
                 return View(model);

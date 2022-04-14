@@ -24,8 +24,8 @@ namespace JosephHungerman.Extensions
             services.AddSendGrid(options =>
             {
                 options.ApiKey = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") == "Production"
-                    ? configuration.GetSection("Email:JshProd:ApiKey").ToString()
-                    : configuration.GetSection("Email:JshDev:ApiKey").ToString();
+                    ? configuration.GetSection("Email:JshProd:ApiKey").Value
+                    : configuration.GetSection("Email:JshDev:ApiKey").Value;
             });
             services.AddDbContext<ApplicationDbContext>(options =>
             {
