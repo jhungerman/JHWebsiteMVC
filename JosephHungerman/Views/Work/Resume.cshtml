@@ -3,10 +3,11 @@
 *@
 @using JosephHungerman.Models.Work
 @model JosephHungerman.Models.ViewModels.ResumeViewModel
-@{
+@section Quotes {
+    @await Html.PartialAsync("_QuotePartial", Model.Quote)
 }
 
-<div class="container-fluid">
+<div class="container-fluid mt-2">
     <h2 class="text-center">@Model.Resume.Name<a id="editBtn" asp-action="EditResume"><span class="position-absolute end-0 me-3 text-black"><i class="fas fa-pencil fa-2xs"></i></span></a></h2>
 </div>
 

@@ -1,4 +1,5 @@
 ﻿using System.Text.Json;
+using JosephHungerman.Models;
 using JosephHungerman.Models.Work;
 
 namespace JosephHungerman.Data
@@ -11,10 +12,20 @@ namespace JosephHungerman.Data
             if (!context.Resumes.Any())
             {
                 using StreamReader reader = new(@"Data\resumeseed.json");
-                string resumeJson = await reader.ReadToEndAsync();
-                Resume resume = JsonSerializer.Deserialize<Resume>(resumeJson);
+                string json = await reader.ReadToEndAsync();
+                Resume resume = JsonSerializer.Deserialize<Resume>(json);
 
                 await context.AddAsync(resume);
+                await context.SaveChangesAsync();
+            }
+
+            if (!context.Quotes.Any())
+            {
+                using StreamReader reader = new(@"Data\quoteseed.json");
+                string json = await reader.ReadToEndAsync();
+                List<Quote> quotes = JsonSerializer.Deserialize<List<Quote>>(json);
+
+                await context.AddRangeAsync(quotes);
                 await context.SaveChangesAsync();
             }
         }

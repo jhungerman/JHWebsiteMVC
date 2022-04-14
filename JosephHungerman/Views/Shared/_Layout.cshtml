@@ -11,7 +11,7 @@
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow">
             <div class="container-fluid">
                 <a class="navbar-brand border-2" asp-area="" asp-controller="Home" asp-action="Index" id="name-lg">
                     <h2>J|H</h2>
@@ -61,6 +61,9 @@
             </div>
         </nav>
     </header>
+<div class="w-100">
+    @await RenderSectionAsync("Quotes", false)
+</div>
     <div class="container">
         <main role="main" class="pb-3">
             @RenderBody()

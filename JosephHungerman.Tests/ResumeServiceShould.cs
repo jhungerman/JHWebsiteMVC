@@ -59,7 +59,7 @@ public class ResumeServiceShould
     public async void ReturnNotFoundExceptionWhenGetResumeDetailsDataCallReturnsEmptyList()
     {
         var expectedResponse = new ServiceResponseDtos<Resume>.ServiceNotFoundExceptionResponse();
-        List<Resume>? resumeList = new List<Resume>();
+        List<Resume>? resumeList = new();
 
         _unitOfWork.Setup(x => x.ResumeRepository.GetAsync(It.IsAny<Expression<Func<Resume, bool>>?>(),
                 It.IsAny<Func<IQueryable<Resume>, IOrderedQueryable<Resume>>?>(), It.IsAny<string>()))
@@ -75,7 +75,7 @@ public class ResumeServiceShould
     {
         Resume resume = (Resume)MockServiceResults.GetResumeSuccessResult();
         var expectedResponse = new ServiceResponseDtos<Resume>.ServiceSuccessResponse(resume);
-        List<Resume> resumeList = new List<Resume> {resume};
+        List<Resume> resumeList = new() {resume};
 
         _unitOfWork.Setup(x => x.ResumeRepository.GetAsync(It.IsAny<Expression<Func<Resume, bool>>?>(),
                 It.IsAny<Func<IQueryable<Resume>, IOrderedQueryable<Resume>>?>(), It.IsAny<string>()))

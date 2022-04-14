@@ -1,4 +1,5 @@
-﻿using JosephHungerman.Models.ViewModels;
+﻿using JosephHungerman.Models;
+using JosephHungerman.Models.ViewModels;
 using JosephHungerman.Models.Work;
 using JosephHungerman.Services;
 using Microsoft.AspNetCore.Authorization;
@@ -9,10 +10,12 @@ namespace JosephHungerman.Controllers
     public class WorkController : Controller
     {
         private readonly IResumeService _resumeService;
+        private readonly IQuoteService _quoteService;
 
-        public WorkController(IResumeService resumeService)
+        public WorkController(IResumeService resumeService, IQuoteService quoteService)
         {
             _resumeService = resumeService;
+            _quoteService = quoteService;
         }
 
         public async Task<IActionResult> Resume()
@@ -44,7 +47,12 @@ namespace JosephHungerman.Controllers
                     Resume = (Resume)response.Result!
                 };
 
-                return View(resumeViewModel);
+                var quoteResponse = await _quoteService.GetPageQuoteAsync(PageType.Resume);
+                if (quoteResponse.IsSuccess)
+                {
+                    resumeViewModel.Quote = (Quote)quoteResponse.Result!;
+                    return View(resumeViewModel);
+                }
             }
 
             return RedirectToAction(nameof(Error));

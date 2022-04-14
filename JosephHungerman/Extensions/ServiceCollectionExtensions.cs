@@ -37,6 +37,7 @@ namespace JosephHungerman.Extensions
             services.AddScoped<IEmailService, EmailService>();
             services.AddScoped<ICaptchaService, CaptchaService>();
             services.AddScoped<IResumeService, ResumeService>();
+            services.AddScoped<IQuoteService, QuoteService>();
             services.AddScoped<DbInitializer>();
 
             using var dbinit = services.BuildServiceProvider().GetRequiredService<ApplicationDbContext>();

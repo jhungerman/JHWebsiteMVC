@@ -22,6 +22,11 @@ footer {
     font-family: "Courier New";
 }
 
+.introQuote {
+    height: 25vh;
+    font-size: 1.5em;
+}
+
 .name-title {
     font-family: "Courier New";
 }
@@ -54,3 +59,11 @@ footer {
         display: none;
     }
 }
+
+@media only screen and (max-width: 1200px) {
+    .introQuote {
+        flex-direction: column;
+        font-size: 1.25em
+    }
+}
+

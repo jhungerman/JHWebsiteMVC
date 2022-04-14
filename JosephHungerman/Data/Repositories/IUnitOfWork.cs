@@ -8,6 +8,7 @@ namespace JosephHungerman.Data.Repositories
     {
         IRepository<Message> MessageRepository { get; }
         IRepository<Resume> ResumeRepository { get; }
+        IRepository<Quote> QuoteRepository { get; }
         Task<bool> SaveChangesAsync();
     }
 }

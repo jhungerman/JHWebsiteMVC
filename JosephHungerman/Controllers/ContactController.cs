@@ -1,4 +1,5 @@
-﻿using JosephHungerman.Models.Contact;
+﻿using JosephHungerman.Models;
+using JosephHungerman.Models.Contact;
 using JosephHungerman.Models.Dtos;
 using JosephHungerman.Models.Dtos.Contact;
 using JosephHungerman.Models.ViewModels;
@@ -11,11 +12,13 @@ namespace JosephHungerman.Controllers
     {
         private readonly IContactService _service;
         private readonly ICaptchaService _captchaService;
+        private readonly IQuoteService _quoteService;
 
-        public ContactController(IContactService service, ICaptchaService captchaService)
+        public ContactController(IContactService service, ICaptchaService captchaService, IQuoteService quoteService)
         {
             _service = service;
             _captchaService = captchaService;
+            _quoteService = quoteService;
         }
 
         [BindProperty(Name = "g-recaptcha-response")]
@@ -23,12 +26,19 @@ namespace JosephHungerman.Controllers
 
         public async Task<IActionResult> Contact()
         {
-            var captchaClientKey = _captchaService.ClientKey;
-            var message = new Message();
+            var response = await _quoteService.GetPageQuoteAsync(PageType.Contact);
 
-            var viewModel = new ContactViewModel {CaptchaClientKey = captchaClientKey, Message = message};
+            if (response.IsSuccess)
+            {
+                var captchaClientKey = _captchaService.ClientKey;
+                var message = new Message();
 
-            return View(viewModel);
+                var viewModel = new ContactViewModel { CaptchaClientKey = captchaClientKey, Message = message, Quote = (Quote)response.Result!};
+
+                return View(viewModel);
+            }
+
+            return RedirectToAction(nameof(Error));
         }
 
         [HttpPost("SendMessage")]
@@ -57,9 +67,18 @@ namespace JosephHungerman.Controllers
             }
         }
 
-        public IActionResult MessageSuccess()
+        public async Task<IActionResult> MessageSuccess()
         {
-            return View();
+            var response = await _quoteService.GetPageQuoteAsync(PageType.MessageSuccess);
+
+            if (response.IsSuccess)
+            {
+                var viewModel = new MessageSuccessViewModel() { Quote = (Quote)response.Result! };
+
+                return View(viewModel);
+            }
+
+            return RedirectToAction(nameof(Error));
         }
 
         public IActionResult Error()

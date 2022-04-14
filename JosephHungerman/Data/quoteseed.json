@@ -1,0 +1,44 @@
+[
+  {
+    "Id": 1,
+    "PageType": 0,
+    "Text": "Learning is not compulsory...neither is survival.",
+    "Author": "Dr. W. Edwards Deming",
+    "CitationUrl": "https://deming.org/quotes/"
+  },
+  {
+    "Id": 2,
+    "PageType": 1,
+    "Text": "People don't buy what you do; they buy why you do it. And what you do simply proves what you believe.",
+    "Author": "Simon Sinek",
+    "CitationUrl": "https://www.goodreads.com/quotes/668292-people-don-t-buy-what-you-do-they-buy-why-you"
+  },
+  {
+    "Id": 3,
+    "PageType": 2,
+    "Text": "Don't take care of your career. Take care of your people. They will take care of your career.",
+    "Author": "Jim Collins",
+    "CitationUrl": "https://www.azquotes.com/author/3121-James_C_Collins"
+  },
+  {
+    "Id": 4,
+    "PageType": 3,
+    "Text": "The single biggest problem in communication is the illusion that it has taken place.",
+    "Author": "George Bernard Shaw",
+    "CitationUrl": "https://www.brainyquote.com/topics/communication-quotes"
+  },
+  {
+    "Id": 5,
+    "PageType": 4,
+    "Text": "People are not disturbed by things, but by the views they take of them.",
+    "Author": "Epictetus",
+    "CitationUrl": "https://dailystoic.com/20-stoic-adversity-quotes/"
+  },
+  {
+    "Id": 6,
+    "PageType": 5,
+    "Text": "When you arise in the morning, think of what a precious privilege it is to be alive - to breathe, to think, to enjoy, to love.",
+    "Author": "Marcus Aurelius",
+    "CitationUrl": "https://www.brainyquote.com/quotes/marcus_aurelius_132163#:~:text=When%20you%20arise%20in%20the%20morning%2C%20think%20of%20what%20a,%2C%20to%20enjoy%2C%20to%20love."
+  }
+]
