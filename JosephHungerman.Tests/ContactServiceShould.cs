@@ -10,6 +10,7 @@ using JosephHungerman.Models.Contact;
 using JosephHungerman.Models.Dtos;
 using JosephHungerman.Models.Dtos.Contact;
 using JosephHungerman.Services;
+using JosephHungerman.Services.Interfaces;
 using JosephHungerman.Tests.Models;
 using Moq;
 using Xunit;

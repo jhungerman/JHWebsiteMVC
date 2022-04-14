@@ -1,6 +1,7 @@
 ﻿using JosephHungerman.Data.Repositories;
 using JosephHungerman.Models.Dtos;
 using JosephHungerman.Models.Work;
+using JosephHungerman.Services.Interfaces;
 
 namespace JosephHungerman.Services;
 
@@ -17,16 +18,14 @@ public class ResumeService : IResumeService
     {
         try
         {
-            var resumes = await _unitOfWork.ResumeRepository.GetAsync(
+            var resume = await _unitOfWork.ResumeRepository.GetFirstAsync(
                 includeProperties:
                 $"{nameof(Resume.WorkExperiences)},{nameof(Resume.Educations)},{nameof(Resume.Skills)},{nameof(Resume.Certifications)},{nameof(Resume.WorkExperiences)}.{nameof(WorkExperience.WorkDetails)}");
 
-            if (resumes == null || !resumes.Any())
+            if (resume == null)
             {
                 return new ServiceResponseDtos<List<Resume>>.ServiceNotFoundExceptionResponse();
             }
-
-            var resume = resumes.FirstOrDefault();
 
             return new ServiceResponseDtos<Resume>.ServiceSuccessResponse(resume!);
         }

@@ -37,6 +37,24 @@ namespace JosephHungerman.Data.Repositories
             return await query.AsNoTracking().ToListAsync();
         }
 
+        public async Task<TEntity?> GetFirstAsync(Expression<Func<TEntity, bool>>? filter = null, string includeProperties = "")
+        {
+            IQueryable<TEntity> query = _dbSet;
+
+            if (filter != null)
+            {
+                query = query.Where(filter);
+            }
+
+            foreach (var includeProperty in includeProperties.Split
+                         (new[] { ',' }, StringSplitOptions.RemoveEmptyEntries))
+            {
+                query = query.Include(includeProperty);
+            }
+
+            return await query.AsNoTracking().FirstOrDefaultAsync();
+        }
+
         public async Task<TEntity?> GetByIdAsync(object id)
         {
             TEntity? entity = await _dbSet.FindAsync(id);

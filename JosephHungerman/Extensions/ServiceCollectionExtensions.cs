@@ -4,6 +4,7 @@ using JosephHungerman.Data;
 using JosephHungerman.Data.Repositories;
 using JosephHungerman.Helpers;
 using JosephHungerman.Services;
+using JosephHungerman.Services.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using SendGrid.Extensions.DependencyInjection;
 
