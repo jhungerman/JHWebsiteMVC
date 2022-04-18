@@ -61,7 +61,7 @@ footer {
 }
 
 @media only screen and (max-width: 1200px) {
-    .introQuote {
+    .introQuote, .edit-we-company {
         flex-direction: column;
         font-size: 1.25em
     }

@@ -28,7 +28,17 @@ namespace JosephHungerman.Controllers
             return await GetResumeDetailsAsync();
         }
 
-        [HttpPost]
+        [HttpPost("Work/Resume/Edit")]
+        public async Task<IActionResult> SaveResume(ResumeViewModel resumeModel)
+        {
+            var response = await _resumeService.UpdateResumeAsync(resumeModel.Resume);
+
+            if (response.IsSuccess)
+            {
+                return View(nameof(EditResume), resumeModel);
+            }
+            return RedirectToAction(nameof(Error));
+        }
 
         public IActionResult Error()
         {

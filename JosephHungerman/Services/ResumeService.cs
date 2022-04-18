@@ -34,4 +34,25 @@ public class ResumeService : IResumeService
             return new ServiceResponseDtos<Resume>.ServiceExceptionResponse(e);
         }
     }
+
+    public async Task<ResponseDto> UpdateResumeAsync(Resume resume)
+    {
+        try
+        {
+            var response = await _unitOfWork.ResumeRepository.UpdateAsync(resume);
+
+            var saveSuccessful = await _unitOfWork.SaveChangesAsync();
+
+            if (saveSuccessful)
+            {
+                return new ServiceResponseDtos<Resume>.ServiceSuccessResponse(response);
+            }
+
+            return new ServiceResponseDtos<Resume>.ServiceDbExceptionResponse();
+        }
+        catch (Exception e)
+        {
+            return new ServiceResponseDtos<Resume>.ServiceExceptionResponse(e);
+        }
+    }
 }
