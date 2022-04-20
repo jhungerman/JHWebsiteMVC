@@ -89,4 +89,51 @@ public class QuoteServiceShould
     }
 
     #endregion
+
+    #region UpdateQuote
+
+    [Fact]
+    public async void ReturnGeneralExceptionWhenUpdateThrowsException()
+    {
+        var exception = new Exception("FAILED UPDATE");
+        var expectedResponse = new ServiceResponseDtos<Quote>.ServiceExceptionResponse(exception);
+        var quote = (Quote)MockServiceResults.GetQuoteSuccessResult();
+
+        _unitOfWork.Setup(x => x.QuoteRepository.UpdateAsync(It.IsAny<Quote>()))
+            .ThrowsAsync(exception);
+
+        var response = await _sut.UpdateQuoteAsync(quote);
+
+        response.Should().BeEquivalentTo(expectedResponse, opt => opt.Excluding(o => o.ErrorMessages));
+    }
+
+    [Fact]
+    public async void ReturnDbExceptionWhenSaveIsUnsuccessful()
+    {
+        var expectedResponse = new ServiceResponseDtos<Quote>.ServiceDbExceptionResponse();
+        var quote = (Quote)MockServiceResults.GetQuoteSuccessResult();
+
+        _unitOfWork.Setup(x => x.QuoteRepository.UpdateAsync(It.IsAny<Quote>())).ReturnsAsync(quote);
+        _unitOfWork.Setup(x => x.SaveChangesAsync()).ReturnsAsync(false);
+
+        var response = await _sut.UpdateQuoteAsync(quote);
+
+        response.Should().BeEquivalentTo(expectedResponse, opt => opt.Excluding(o => o.ErrorMessages));
+    }
+
+    [Fact]
+    public async void ReturnSuccessfulResponseWhenSaveIsSuccessful()
+    {
+        var quote = (Quote)MockServiceResults.GetQuoteSuccessResult();
+        var expectedResponse = new ServiceResponseDtos<Quote>.ServiceSuccessResponse(quote);
+
+        _unitOfWork.Setup(x => x.QuoteRepository.UpdateAsync(It.IsAny<Quote>())).ReturnsAsync(quote);
+        _unitOfWork.Setup(x => x.SaveChangesAsync()).ReturnsAsync(true);
+
+        var response = await _sut.UpdateQuoteAsync(quote);
+
+        response.Should().BeEquivalentTo(expectedResponse, opt => opt.Excluding(o => o.ErrorMessages));
+    }
+
+    #endregion
 }

@@ -8,6 +8,7 @@ using JosephHungerman.Models.Dtos;
 using JosephHungerman.Models.Work;
 using JosephHungerman.Services;
 using JosephHungerman.Tests.Models;
+using Microsoft.AspNetCore.Http.Features;
 using Moq;
 using Xunit;
 
@@ -84,5 +85,51 @@ public class ResumeServiceShould
 
         response.Should().BeEquivalentTo(expectedResponse, opt => opt.Excluding(o => o.ErrorMessages));
     }
+    #endregion
+
+    #region AddResume
+
+    [Fact]
+    public async void ReturnGeneralExceptionWhenAddThrowsException()
+    {
+        var exception = new Exception("FAILED ADD");
+        var expectedResponse = new ServiceResponseDtos<Resume>.ServiceExceptionResponse(exception);
+        var resume = (Resume) MockServiceResults.GetResumeSuccessResult();
+       
+        _unitOfWork.Setup(x => x.ResumeRepository.AddAsync(It.IsAny<Resume>())).ThrowsAsync(exception);
+
+        var response = await _sut.AddResumeAsync(resume);
+
+        response.Should().BeEquivalentTo(expectedResponse, opt => opt.Excluding(o => o.ErrorMessages));
+    }
+
+    [Fact]
+    public async void ReturnDbExceptionWhenSaveIsUnsuccessful()
+    {
+        var expectedResponse = new ServiceResponseDtos<Resume>.ServiceDbExceptionResponse();
+        var resume = (Resume)MockServiceResults.GetResumeSuccessResult();
+
+        _unitOfWork.Setup(x => x.ResumeRepository.AddAsync(It.IsAny<Resume>())).ReturnsAsync(resume);
+        _unitOfWork.Setup(x => x.SaveChangesAsync()).ReturnsAsync(false);
+
+        var response = await _sut.AddResumeAsync(resume);
+
+        response.Should().BeEquivalentTo(expectedResponse, opt => opt.Excluding(o => o.ErrorMessages));
+    }
+
+    [Fact]
+    public async void ReturnSuccessfulResponseWhenSaveIsSuccessful()
+    {
+        var resume = (Resume)MockServiceResults.GetResumeSuccessResult();
+        var expectedResponse = new ServiceResponseDtos<Resume>.ServiceSuccessResponse(resume);
+
+        _unitOfWork.Setup(x => x.ResumeRepository.AddAsync(It.IsAny<Resume>())).ReturnsAsync(resume);
+        _unitOfWork.Setup(x => x.SaveChangesAsync()).ReturnsAsync(true);
+
+        var response = await _sut.AddResumeAsync(resume);
+
+        response.Should().BeEquivalentTo(expectedResponse, opt => opt.Excluding(o => o.ErrorMessages));
+    }
+
     #endregion
 }
