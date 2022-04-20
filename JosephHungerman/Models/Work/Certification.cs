@@ -8,7 +8,7 @@ namespace JosephHungerman.Models.Work
         public string? SourceUrl { get; set; }
         [Required] public string Subject { get; set; }
         public string? CredentialId { get; set; }
-        [Required] public DateTime StartDate { get; set; }
+        [Required] public DateTime StartDate { get; set; } = DateTime.Today;
         public DateTime? EndDate { get; set; }
         public int ResumeId { get; set; }
         public Resume Resume { get; set; }

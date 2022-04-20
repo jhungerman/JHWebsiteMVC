@@ -18,15 +18,16 @@ public class ResumeService : IResumeService
     {
         try
         {
-            var resume = await _unitOfWork.ResumeRepository.GetFirstAsync(
+            var resumes = await _unitOfWork.ResumeRepository.GetAsync(
                 includeProperties:
                 $"{nameof(Resume.WorkExperiences)},{nameof(Resume.Educations)},{nameof(Resume.Skills)},{nameof(Resume.Certifications)},{nameof(Resume.WorkExperiences)}.{nameof(WorkExperience.WorkDetails)}");
 
-            if (resume == null)
+            if (resumes == null || !resumes.Any())
             {
                 return new ServiceResponseDtos<List<Resume>>.ServiceNotFoundExceptionResponse();
             }
 
+            var resume = resumes.OrderByDescending(r => r.Id).FirstOrDefault();
             return new ServiceResponseDtos<Resume>.ServiceSuccessResponse(resume!);
         }
         catch (Exception e)
@@ -35,11 +36,11 @@ public class ResumeService : IResumeService
         }
     }
 
-    public async Task<ResponseDto> UpdateResumeAsync(Resume resume)
+    public async Task<ResponseDto> AddResumeAsync(Resume resume)
     {
         try
         {
-            var response = await _unitOfWork.ResumeRepository.UpdateAsync(resume);
+            var response = await _unitOfWork.ResumeRepository.AddAsync(resume);
 
             var saveSuccessful = await _unitOfWork.SaveChangesAsync();
 

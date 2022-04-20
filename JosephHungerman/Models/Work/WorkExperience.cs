@@ -12,7 +12,7 @@ namespace JosephHungerman.Models.Work
         public string CompanyState { get; set; }
         public string? CompanyUrl { get; set; }
         [Required]
-        public DateTime StartDate { get; set; }
+        public DateTime StartDate { get; set; } = DateTime.Now;
         public DateTime? EndDate { get; set; }
         [Required]
         public string Title { get; set; }

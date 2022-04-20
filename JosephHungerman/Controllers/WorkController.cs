@@ -31,9 +31,10 @@ namespace JosephHungerman.Controllers
         [HttpPost("Work/Resume/Edit")]
         public async Task<IActionResult> SaveResume(ResumeViewModel resumeModel)
         {
-            var response = await _resumeService.UpdateResumeAsync(resumeModel.Resume);
+            var resumeResponse = await _resumeService.AddResumeAsync(resumeModel.Resume);
+            var quoteResponse = await _quoteService.UpdateQuoteAsync(resumeModel.Quote);
 
-            if (response.IsSuccess)
+            if (resumeResponse.IsSuccess && quoteResponse.IsSuccess)
             {
                 return View(nameof(EditResume), resumeModel);
             }
@@ -65,6 +66,76 @@ namespace JosephHungerman.Controllers
             }
 
             return RedirectToAction(nameof(Error));
+        }
+
+        public IActionResult AddSkill(ResumeViewModel resumeModel)
+        {
+            resumeModel.Resume.Skills.Add(new Skill());
+
+            return View(nameof(EditResume), resumeModel);
+        }
+
+        public IActionResult RemoveSkill(ResumeViewModel resumeModel, int index)
+        {
+            resumeModel.Resume.Skills.RemoveAt(index);
+
+            return View(nameof(EditResume), resumeModel);
+        }
+
+        public IActionResult AddWorkExperience(ResumeViewModel resumeModel)
+        {
+            resumeModel.Resume.WorkExperiences.Add(new WorkExperience { WorkDetails = new List<WorkDetail> {new WorkDetail()}});
+
+            return View(nameof(EditResume), resumeModel);
+        }
+
+        public IActionResult AddWorkDetail(ResumeViewModel resumeModel, int workExperienceId)
+        {
+            resumeModel.Resume.WorkExperiences[workExperienceId].WorkDetails.Add(new WorkDetail());
+
+            return View(nameof(EditResume), resumeModel);
+        }
+
+        public IActionResult RemoveWorkDetail(ResumeViewModel resumeModel, int workIndex, int detailIndex)
+        {
+            resumeModel.Resume.WorkExperiences[workIndex].WorkDetails.RemoveAt(detailIndex);
+
+            return View(nameof(EditResume), resumeModel);
+        }
+
+        public IActionResult RemoveWorkExperience(ResumeViewModel resumeModel, int index)
+        {
+            resumeModel.Resume.WorkExperiences.RemoveAt(index);
+
+            return View(nameof(EditResume), resumeModel);
+        }
+
+        public IActionResult AddEducation(ResumeViewModel resumeModel)
+        {
+            resumeModel.Resume.Educations.Add(new Education());
+
+            return View(nameof(EditResume), resumeModel);
+        }
+
+        public IActionResult RemoveEducation(ResumeViewModel resumeModel, int index)
+        {
+            resumeModel.Resume.Educations.RemoveAt(index);
+
+            return View(nameof(EditResume), resumeModel);
+        }
+
+        public IActionResult AddCertification(ResumeViewModel resumeModel)
+        {
+            resumeModel.Resume.Certifications.Add(new Certification());
+
+            return View(nameof(EditResume), resumeModel);
+        }
+
+        public IActionResult RemoveCertification(ResumeViewModel resumeModel, int index)
+        {
+            resumeModel.Resume.Certifications.RemoveAt(index);
+
+            return View(nameof(EditResume), resumeModel);
         }
     }
 }

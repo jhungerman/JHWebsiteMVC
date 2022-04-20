@@ -32,4 +32,25 @@ public class QuoteService : IQuoteService
             return new ServiceResponseDtos<Quote>.ServiceExceptionResponse(e);
         }
     }
+
+    public async Task<ResponseDto> UpdateQuoteAsync(Quote resumeModelQuote)
+    {
+        try
+        {
+            var response = await _unitOfWork.QuoteRepository.UpdateAsync(resumeModelQuote);
+
+            var saveSuccessful = await _unitOfWork.SaveChangesAsync();
+
+            if (saveSuccessful)
+            {
+                return new ServiceResponseDtos<Quote>.ServiceSuccessResponse(response);
+            }
+
+            return new ServiceResponseDtos<Quote>.ServiceDbExceptionResponse();
+        }
+        catch (Exception e)
+        {
+            return new ServiceResponseDtos<Quote>.ServiceExceptionResponse(e);
+        }
+    }
 }

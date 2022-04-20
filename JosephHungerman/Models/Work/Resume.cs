@@ -4,6 +4,9 @@ namespace JosephHungerman.Models.Work
 {
     public class Resume : BaseEntity, IEntity
     {
+        [Required] 
+        public DateTime Timestamp { get; set; } = DateTime.UtcNow;
+
         [Required]
         public string Name { get; set; }
         [Required]
