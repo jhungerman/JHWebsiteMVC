@@ -1,0 +1,47 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@model JosephHungerman.Models.ViewModels.AboutViewModel
+@{
+}
+
+<form method="post" asp-antiforgery="true">
+    <section class="my-2 card">
+        <h3 class="card-header">Quote</h3>
+        <div class="card-body">
+            <input asp-for="Quote.Id" hidden />
+            <input asp-for="Quote.PageType" hidden />
+            <div class="input-group mb-1">
+                <label class="input-group-text col-3 col-md-2">Text: </label>
+                <textarea asp-for="Quote.Text" class="form-control"></textarea>
+            </div>
+            <div class="input-group mb-1">
+                <label class="input-group-text col-3 col-md-2">Author: </label>
+                <input type="text" asp-for="Quote.Author" class="form-control" />
+            </div>
+            <div class="input-group">
+                <label class="input-group-text col-3 col-md-2">Url: </label>
+                <input asp-for="Quote.CitationUrl" class="form-control" />
+            </div>
+        </div>
+    </section>
+    <div class="card">
+        <h3 class="card-header">Sections</h3>
+        <div class="card-body">
+            @for (int i = 0; i < Model.Sections.Count; i++)
+            {
+                <section class="card mb-2">
+                    <div class="card-body">
+                        <input asp-for="Sections[i].Id" hidden/>
+                        <input asp-for="Sections[i].Title" class="card-title"/>
+                        @for (int j = 0; j < Model.Sections[i].Paragraphs.Count; j++)
+                        {
+                            <input asp-for="Sections[i].Paragraphs[j].Id" hidden/>
+                            <textarea class="input-group mb-1" asp-for="Sections[i].Paragraphs[j].Content" rows="10"></textarea>
+                        }
+                    </div>
+                </section>
+            }
+        </div>
+    </div>
+</form>

@@ -17,7 +17,24 @@ namespace JosephHungerman.Controllers
             _quoteService = quoteService;
         }
 
+        [HttpGet("About")]
         public async Task<IActionResult> About()
+        {
+            return await GetAboutDetailsAsync();
+        }
+
+        [HttpGet("About/Edit")]
+        public async Task<IActionResult> EditAbout()
+        {
+            return await GetAboutDetailsAsync();
+        }
+
+        public IActionResult Error()
+        {
+            return View(new ErrorViewModel());
+        }
+
+        private async Task<IActionResult> GetAboutDetailsAsync()
         {
             var sectionResponse = await _aboutService.GetSectionsAsync();
             var quoteResponse = await _quoteService.GetPageQuoteAsync(PageType.About);
@@ -26,19 +43,14 @@ namespace JosephHungerman.Controllers
             {
                 var model = new AboutViewModel
                 {
-                    Quote = (Quote) quoteResponse.Result!,
-                    Sections = (List<Section>) sectionResponse.Result!
+                    Quote = (Quote)quoteResponse.Result!,
+                    Sections = (List<Section>)sectionResponse.Result!
                 };
 
                 return View(model);
             }
 
             return RedirectToAction(nameof(Error));
-        }
-
-        public IActionResult Error()
-        {
-            return View(new ErrorViewModel());
         }
     }
 }

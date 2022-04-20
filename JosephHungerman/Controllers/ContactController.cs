@@ -23,6 +23,7 @@ namespace JosephHungerman.Controllers
         [BindProperty(Name = "g-recaptcha-response")]
         public string CaptchaResponse { get; set; }
 
+        [HttpGet("Contact")]
         public async Task<IActionResult> Contact()
         {
             var response = await _quoteService.GetPageQuoteAsync(PageType.Contact);
