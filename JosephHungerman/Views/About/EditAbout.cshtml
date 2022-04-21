@@ -28,16 +28,25 @@
     <div class="card">
         <h3 class="card-header">Sections</h3>
         <div class="card-body">
+            <div class="d-flex justify-content-end mb-1">
+                <button class="btn btn-outline-success border-0" asp-action="AddSection"><i class="fas fa-plus-circle"></i></button>
+            </div>
             @for (int i = 0; i < Model.Sections.Count; i++)
             {
                 <section class="card mb-2">
                     <div class="card-body">
-                        <input asp-for="Sections[i].Id" hidden/>
-                        <input asp-for="Sections[i].Title" class="card-title"/>
+                        <div class="row d-flex align-items-center mb-1 justify-content-between">
+                            <div class="col-3 col-lg-6">
+                                <input asp-for="Sections[i].Id"/>
+                                <input asp-for="Sections[i].Title"/>
+                            </div>
+                            <button class="btn btn-danger col-auto me-3" asp-action="RemoveSection" asp-route-index="@i"><i class="fas fa-trash"></i></button>
+                        </div>
                         @for (int j = 0; j < Model.Sections[i].Paragraphs.Count; j++)
                         {
-                            <input asp-for="Sections[i].Paragraphs[j].Id" hidden/>
-                            <textarea class="input-group mb-1" asp-for="Sections[i].Paragraphs[j].Content" rows="10"></textarea>
+                                <input asp-for="Sections[i].Paragraphs[j].Id" hidden/>
+                                <textarea class="input-group mb-1" asp-for="Sections[i].Paragraphs[j].Content" rows="10"></textarea>
+                                <button class="btn btn-outline-danger border-0 col-12" asp-action="RemoveParagraph" asp-route-sectionIndex="@i" asp-route-paraIndex="@j"><i class="fas fa-trash"></i></button>
                         }
                     </div>
                 </section>

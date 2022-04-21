@@ -66,5 +66,26 @@ namespace JosephHungerman.Controllers
 
             return RedirectToAction(nameof(Error));
         }
+
+        public IActionResult AddSection(AboutViewModel aboutView)
+        {
+            aboutView.Sections.Add(new Section { Paragraphs = new List<Paragraph> {new()}});
+
+            return View(nameof(EditAbout), aboutView);
+        }
+
+        public IActionResult RemoveSection(AboutViewModel aboutView, int index)
+        {
+            aboutView.Sections.RemoveAt(index);
+
+            return View(nameof(EditAbout), aboutView);
+        }
+
+        public IActionResult RemoveParagraph(AboutViewModel aboutView, int sectionIndex, int paraIndex)
+        {
+            aboutView.Sections[sectionIndex].Paragraphs.RemoveAt(paraIndex);
+
+            return View(nameof(EditAbout), aboutView);
+        }
     }
 }
