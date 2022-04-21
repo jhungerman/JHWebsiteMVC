@@ -52,5 +52,19 @@ namespace JosephHungerman.Controllers
 
             return RedirectToAction(nameof(Error));
         }
+
+        [HttpPost("About/Edit")]
+        public async Task<IActionResult> SaveAbout(AboutViewModel aboutView)
+        {
+            var aboutResponse = await _aboutService.UpdateSectionsAsync(aboutView.Sections);
+            var quoteResponse = await _quoteService.UpdateQuoteAsync(aboutView.Quote);
+
+            if (aboutResponse.IsSuccess && quoteResponse.IsSuccess)
+            {
+                return View(nameof(EditAbout), aboutView);
+            }
+
+            return RedirectToAction(nameof(Error));
+        }
     }
 }
