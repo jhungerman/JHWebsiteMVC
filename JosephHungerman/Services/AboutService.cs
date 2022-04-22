@@ -65,12 +65,12 @@ namespace JosephHungerman.Services
                             }
                         }
 
-                        results.Add(await _unitOfWork.SectionRepository.UpdateAsync(matchSection));
+                        var result = await _unitOfWork.SectionRepository.UpdateAsync(matchSection);
+                        results.Add(result);
                     }
 
                 }
 
-                var sectionsToAdd = sections.Except(currentSections).ToList();
                 var saveSuccessful = await _unitOfWork.SaveChangesAsync();
 
                 if (saveSuccessful)
