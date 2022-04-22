@@ -56,6 +56,7 @@ namespace JosephHungerman.Controllers
         [HttpPost("About/Edit")]
         public async Task<IActionResult> SaveAbout(AboutViewModel aboutView)
         {
+            ModelState.Clear();
             var aboutResponse = await _aboutService.UpdateSectionsAsync(aboutView.Sections);
             var quoteResponse = await _quoteService.UpdateQuoteAsync(aboutView.Quote);
 
@@ -76,6 +77,7 @@ namespace JosephHungerman.Controllers
 
         public IActionResult RemoveSection(AboutViewModel aboutView, int index)
         {
+            ModelState.Clear();
             aboutView.Sections.RemoveAt(index);
 
             return View(nameof(EditAbout), aboutView);
@@ -83,7 +85,16 @@ namespace JosephHungerman.Controllers
 
         public IActionResult RemoveParagraph(AboutViewModel aboutView, int sectionIndex, int paraIndex)
         {
+            ModelState.Clear();
             aboutView.Sections[sectionIndex].Paragraphs.RemoveAt(paraIndex);
+
+            return View(nameof(EditAbout), aboutView);
+        }
+
+        public IActionResult AddParagraph(AboutViewModel aboutView, int sectionIndex)
+        {
+            ModelState.Clear();
+            aboutView.Sections[sectionIndex].Paragraphs.Add(new Paragraph());
 
             return View(nameof(EditAbout), aboutView);
         }

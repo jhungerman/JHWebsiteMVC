@@ -12,6 +12,7 @@ namespace JosephHungerman.Data.Repositories
         private IRepository<Resume>? _resumeRepository;
         private IRepository<Quote>? _quoteRepository;
         private IRepository<Section>? _sectionRepository;
+        private IRepository<Paragraph>? _paragraphRepository;
 
         public UnitOfWork(ApplicationDbContext context)
         {
@@ -22,6 +23,7 @@ namespace JosephHungerman.Data.Repositories
         public IRepository<Resume> ResumeRepository => _resumeRepository ??= new Repository<Resume>(_context);
         public IRepository<Quote> QuoteRepository => _quoteRepository ??= new Repository<Quote>(_context);
         public IRepository<Section> SectionRepository => _sectionRepository ??= new Repository<Section>(_context);
+        public IRepository<Paragraph> ParagraphRepository => _paragraphRepository ??= new Repository<Paragraph>(_context);
 
         public async Task<bool> SaveChangesAsync()
         {

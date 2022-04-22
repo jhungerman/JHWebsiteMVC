@@ -1,6 +1,7 @@
 [
   {
     "Id": 1,
+    "OrderIndex": 1,
     "Title": "My Values",
     "Paragraphs": [
       {
@@ -15,6 +16,7 @@
   },
   {
     "Id": 2,
+    "OrderIndex": 2,
     "Title": "My Life",
     "Paragraphs": [
       {
@@ -25,6 +27,7 @@
   },
   {
     "Id": 3,
+    "OrderIndex": 3,
     "Title": "My Career",
     "Paragraphs": [
       {

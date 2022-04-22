@@ -18,7 +18,7 @@ namespace JosephHungerman.Services
         {
             try
             {
-                var sections = await _unitOfWork.SectionRepository.GetAsync(includeProperties: $"{nameof(Section.Paragraphs)}");
+                var sections = await _unitOfWork.SectionRepository.GetAsync(includeProperties: $"{nameof(Section.Paragraphs)}", orderBy: s => s.OrderBy(o => o.OrderIndex));
 
                 if (sections == null || !sections.Any())
                 {
@@ -37,26 +37,45 @@ namespace JosephHungerman.Services
         {
             try
             {
-                var currentSections = await _unitOfWork.SectionRepository.GetAsync();
+                var currentSections = await _unitOfWork.SectionRepository.GetAsync(includeProperties: nameof(Section.Paragraphs));
 
                 if (currentSections == null || !currentSections.Any())
                 {
                     return new ServiceResponseDtos<List<Section>>.ServiceNotFoundExceptionResponse();
                 }
 
-                IList<Section> itemsToDelete = currentSections.Except(sections).ToList();
-                if (itemsToDelete.Any())
+                List<Section> results = new();
+                foreach (var currentSection in currentSections)
                 {
-                    await _unitOfWork.SectionRepository.DeleteAllAsync(itemsToDelete);
+                    var matchSection = sections.FirstOrDefault(s => s.Id == currentSection.Id);
+                    if (matchSection == null)
+                    {
+                        await _unitOfWork.SectionRepository.DeleteAsync(currentSection);
+                    }
+                    else
+                    {
+                        foreach (var currentSectionParagraph in currentSection.Paragraphs)
+                        {
+                            var matchParagraph =
+                                matchSection.Paragraphs.FirstOrDefault(p => p.Id == currentSectionParagraph.Id);
+
+                            if (matchParagraph == null)
+                            {
+                                await _unitOfWork.ParagraphRepository.DeleteAsync(currentSectionParagraph);
+                            }
+                        }
+
+                        results.Add(await _unitOfWork.SectionRepository.UpdateAsync(matchSection));
+                    }
+
                 }
 
-                var result = await _unitOfWork.SectionRepository.UpdateAllAsync(sections);
-
+                var sectionsToAdd = sections.Except(currentSections).ToList();
                 var saveSuccessful = await _unitOfWork.SaveChangesAsync();
 
                 if (saveSuccessful)
                 {
-                    return new ServiceResponseDtos<List<Section>>.ServiceSuccessResponse(result.ToList());
+                    return new ServiceResponseDtos<List<Section>>.ServiceSuccessResponse(results.OrderBy(r => r.OrderIndex).ToList());
                 }
 
                 return new ServiceResponseDtos<List<Section>>.ServiceDbExceptionResponse();
