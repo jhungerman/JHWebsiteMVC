@@ -77,6 +77,7 @@ namespace JosephHungerman.Controllers
 
         public IActionResult RemoveSkill(ResumeViewModel resumeModel, int index)
         {
+            ModelState.Clear();
             resumeModel.Resume.Skills.RemoveAt(index);
 
             return View(nameof(EditResume), resumeModel);
@@ -98,6 +99,7 @@ namespace JosephHungerman.Controllers
 
         public IActionResult RemoveWorkDetail(ResumeViewModel resumeModel, int workIndex, int detailIndex)
         {
+            ModelState.Clear();
             resumeModel.Resume.WorkExperiences[workIndex].WorkDetails.RemoveAt(detailIndex);
 
             return View(nameof(EditResume), resumeModel);
@@ -105,6 +107,7 @@ namespace JosephHungerman.Controllers
 
         public IActionResult RemoveWorkExperience(ResumeViewModel resumeModel, int index)
         {
+            ModelState.Clear();
             resumeModel.Resume.WorkExperiences.RemoveAt(index);
 
             return View(nameof(EditResume), resumeModel);
@@ -119,6 +122,7 @@ namespace JosephHungerman.Controllers
 
         public IActionResult RemoveEducation(ResumeViewModel resumeModel, int index)
         {
+            ModelState.Clear();
             resumeModel.Resume.Educations.RemoveAt(index);
 
             return View(nameof(EditResume), resumeModel);
@@ -133,6 +137,7 @@ namespace JosephHungerman.Controllers
 
         public IActionResult RemoveCertification(ResumeViewModel resumeModel, int index)
         {
+            ModelState.Clear();
             resumeModel.Resume.Certifications.RemoveAt(index);
 
             return View(nameof(EditResume), resumeModel);

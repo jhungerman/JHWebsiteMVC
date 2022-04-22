@@ -76,7 +76,7 @@ namespace JosephHungerman.Data.Repositories
             return model;
         }
 
-        public Task<IList<TEntity>> UpdateAll(IList<TEntity> models)
+        public Task<IList<TEntity>> UpdateAllAsync(IList<TEntity> models)
         {
             _dbSet.UpdateRange(models);
 

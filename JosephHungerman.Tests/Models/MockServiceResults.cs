@@ -139,6 +139,23 @@ namespace JosephHungerman.Tests.Models
             };
         }
 
+        public static object GetParagraphsSuccessResult()
+        {
+            return new List<Paragraph>
+            {
+                new()
+                {
+                    Id = 1,
+                    Content = "content 1",
+                },
+                new()
+                {
+                    Id = 2,
+                    Content = "content 2",
+                }
+            };
+        }
+
         public static object GetQuoteSuccessResult()
         {
             return new Quote

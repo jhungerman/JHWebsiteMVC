@@ -11,6 +11,7 @@ namespace JosephHungerman.Data.Repositories
         IRepository<Resume> ResumeRepository { get; }
         IRepository<Quote> QuoteRepository { get; }
         IRepository<Section> SectionRepository { get; }
+        IRepository<Paragraph> ParagraphRepository { get; }
         Task<bool> SaveChangesAsync();
     }
 }

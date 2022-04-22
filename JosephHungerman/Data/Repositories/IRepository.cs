@@ -13,7 +13,7 @@ namespace JosephHungerman.Data.Repositories
         Task<TEntity?> GetByIdAsync(object id);
         Task<IList<TEntity>?> AddAllAsync(IList<TEntity> models);
         Task<TEntity?> AddAsync(TEntity model);
-        Task<IList<TEntity>> UpdateAll(IList<TEntity> models);
+        Task<IList<TEntity>> UpdateAllAsync(IList<TEntity> models);
         Task<TEntity> UpdateAsync(TEntity model);
         Task DeleteAllAsync(IList<TEntity> models);
         Task DeleteAsync(TEntity model);
