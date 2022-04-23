@@ -1,6 +1,7 @@
 ﻿using JosephHungerman.Models;
 using JosephHungerman.Models.ViewModels;
 using JosephHungerman.Services.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace JosephHungerman.Controllers
@@ -14,6 +15,7 @@ namespace JosephHungerman.Controllers
             _quoteService = quoteService;
         }
 
+        [Authorize]
         [HttpGet("Quotes/Edit")]
         public async Task<IActionResult> EditQuotes()
         {
@@ -32,6 +34,7 @@ namespace JosephHungerman.Controllers
             return RedirectToAction(nameof(Error));
         }
 
+        [Authorize]
         [HttpPost("Quotes/Edit")]
         public async Task<IActionResult> SaveQuotes(QuotesViewModel quotesView)
         {

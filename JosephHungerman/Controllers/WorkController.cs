@@ -2,6 +2,7 @@
 using JosephHungerman.Models.ViewModels;
 using JosephHungerman.Models.Work;
 using JosephHungerman.Services.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace JosephHungerman.Controllers
@@ -22,12 +23,14 @@ namespace JosephHungerman.Controllers
             return await GetResumeDetailsAsync();
         }
 
+        [Authorize]
         [HttpGet("Work/Resume/Edit")]
         public async Task<IActionResult> EditResume()
         {
             return await GetResumeDetailsAsync();
         }
 
+        [Authorize]
         [HttpPost("Work/Resume/Edit")]
         public async Task<IActionResult> SaveResume(ResumeViewModel resumeModel)
         {

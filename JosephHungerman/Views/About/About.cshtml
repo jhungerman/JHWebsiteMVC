@@ -6,9 +6,12 @@
 
 @if (Model.Sections.Any())
 {
-    <div class="container-fluid mt-2">
-        <h2><a id="editBtn" asp-action="EditAbout"><span class="position-absolute end-0 me-3 text-black"><i class="fas fa-pencil fa-2xs"></i></span></a></h2>
-    </div>
+    @if (User.Identity.IsAuthenticated)
+    {
+        <div class="container-fluid mt-2">
+            <h2><a id="editBtn" asp-action="EditAbout"><span class="position-absolute end-0 me-3 text-black"><i class="fas fa-pencil fa-2xs"></i></span></a></h2>
+        </div>
+    }
     foreach (var modelSection in Model.Sections)
     {
         <section class="container-fluid mt-2">

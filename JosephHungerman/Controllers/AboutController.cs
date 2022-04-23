@@ -2,6 +2,7 @@
 using JosephHungerman.Models.About;
 using JosephHungerman.Models.ViewModels;
 using JosephHungerman.Services.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace JosephHungerman.Controllers
@@ -23,6 +24,7 @@ namespace JosephHungerman.Controllers
             return await GetAboutDetailsAsync();
         }
 
+        [Authorize]
         [HttpGet("About/Edit")]
         public async Task<IActionResult> EditAbout()
         {
@@ -53,6 +55,7 @@ namespace JosephHungerman.Controllers
             return RedirectToAction(nameof(Error));
         }
 
+        [Authorize]
         [HttpPost("About/Edit")]
         public async Task<IActionResult> SaveAbout(AboutViewModel aboutView)
         {

@@ -7,9 +7,18 @@
     @await Html.PartialAsync("_QuotePartial", Model.Quote)
 }
 
-<div class="container-fluid mt-2">
-    <h2 class="text-center">@Model.Resume.Name<a id="editBtn" asp-action="EditResume"><span class="position-absolute end-0 me-3 text-black"><i class="fas fa-pencil fa-2xs"></i></span></a></h2>
-</div>
+@if (User.Identity.IsAuthenticated)
+{
+    <div class="container-fluid mt-2">
+        <h2 class="text-center">@Model.Resume.Name<a id="editBtn" asp-action="EditResume"><span class="position-absolute end-0 me-3 text-black"><i class="fas fa-pencil fa-2xs"></i></span></a></h2>
+    </div>
+}
+else
+{
+    <div class="container-fluid mt-2">
+        <h2 class="text-center">@Model.Resume.Name</h2>
+    </div>
+}
 
 <div id="divider-container">
     <hr class="hr-bold" />

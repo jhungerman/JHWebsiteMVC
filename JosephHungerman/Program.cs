@@ -1,5 +1,8 @@
 using System.Text.Json;
 using JosephHungerman.Extensions;
+using Microsoft.AspNetCore.Authentication.OpenIdConnect;
+using Microsoft.Identity.Web;
+using Microsoft.Identity.Web.UI;
 
 var builder = WebApplication.CreateBuilder(args);
 //builder.Host.ConfigureAppConfiguration((_, config) =>
@@ -12,11 +15,13 @@ var builder = WebApplication.CreateBuilder(args);
 //});
 
 // Add services to the container.
+builder.Services.AddAuthentication(OpenIdConnectDefaults.AuthenticationScheme)
+    .AddMicrosoftIdentityWebApp(builder.Configuration);
 builder.Services.AddControllersWithViews().AddJsonOptions(options =>
 {
     options.JsonSerializerOptions.PropertyNameCaseInsensitive = true;
     options.JsonSerializerOptions.PropertyNamingPolicy = JsonNamingPolicy.CamelCase;
-});
+}).AddMicrosoftIdentityUI();
 builder.Services.AddApplicationServices(builder.Configuration);
 
 //var endpoint = new Uri(Environment.GetEnvironmentVariable("KV_URI") ?? string.Empty);
@@ -43,6 +48,7 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllerRoute(
