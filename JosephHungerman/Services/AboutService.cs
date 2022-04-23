@@ -2,6 +2,7 @@
 using JosephHungerman.Models.About;
 using JosephHungerman.Models.Dtos;
 using JosephHungerman.Services.Interfaces;
+using Microsoft.Extensions.Azure;
 
 namespace JosephHungerman.Services
 {
@@ -54,6 +55,7 @@ namespace JosephHungerman.Services
                     }
                     else
                     {
+                        var paragraphToRemove = new Paragraph();
                         foreach (var currentSectionParagraph in currentSection.Paragraphs)
                         {
                             var matchParagraph =
@@ -61,11 +63,13 @@ namespace JosephHungerman.Services
 
                             if (matchParagraph == null)
                             {
+                                paragraphToRemove = currentSectionParagraph;
                                 await _unitOfWork.ParagraphRepository.DeleteAsync(currentSectionParagraph);
                             }
                         }
 
-                        var result = await _unitOfWork.SectionRepository.UpdateAsync(matchSection);
+                        if (!string.IsNullOrEmpty(paragraphToRemove.Content)) currentSection.Paragraphs.Remove(paragraphToRemove);
+                        var result = await _unitOfWork.SectionRepository.UpdateAsync(currentSections.FirstOrDefault(cs => cs.Id == matchSection.Id)!);
                         results.Add(result);
                     }
 
