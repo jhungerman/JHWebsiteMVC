@@ -15,6 +15,7 @@ namespace JosephHungerman.Extensions
     {
         public static IServiceCollection AddApplicationServices(this IServiceCollection services, IConfiguration configuration)
         {
+            // TEST DEV BUILD PIPELINE
             services.Configure<EmailSettings>(Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") == "Production"
                 ? configuration.GetSection("Email:JshProd")
                 : configuration.GetSection("Email:JshDev"));
