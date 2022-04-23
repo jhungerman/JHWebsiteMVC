@@ -110,13 +110,13 @@ public class AboutServiceShould
     [Fact]
     public async void ReturnNotFoundExceptionWhenGetReturnsEmptyList()
     {
-        List<Section>? sections = new List<Section>();
+        List<Section> sections = new();
         var setupSections = (List<Section>) MockServiceResults.GetSectionsSuccessResult();
         var expectedResponse = new ServiceResponseDtos<List<Section>>.ServiceNotFoundExceptionResponse();
 
         _unitOfWork.Setup(x => x.SectionRepository.GetAsync(It.IsAny<Expression<Func<Section, bool>>?>(),
                 It.IsAny<Func<IQueryable<Section>, IOrderedQueryable<Section>>?>(), It.IsAny<string>()))
-            .ReturnsAsync(sections.OrderBy(s => s.OrderIndex).ToList);
+            .ReturnsAsync(sections);
 
         var response = await _sut.UpdateSectionsAsync(setupSections);
 
@@ -202,7 +202,7 @@ public class AboutServiceShould
         var expectedResponse = new ServiceResponseDtos<List<Section>>.ServiceSuccessResponse(updateList);
         _unitOfWork.Setup(x => x.SectionRepository.GetAsync(It.IsAny<Expression<Func<Section, bool>>?>(),
                 It.IsAny<Func<IQueryable<Section>, IOrderedQueryable<Section>>?>(), It.IsAny<string>()))
-            .ReturnsAsync(setupSections);
+            .ReturnsAsync(setupSections.OrderBy(s => s.OrderIndex).ToList);
 
         _unitOfWork.SetupSequence(x => x.SectionRepository.UpdateAsync(It.IsAny<Section>()))
             .ReturnsAsync(updateList[0])
