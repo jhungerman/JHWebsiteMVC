@@ -32,9 +32,8 @@ namespace JosephHungerman.Controllers
         public async Task<IActionResult> SaveResume(ResumeViewModel resumeModel)
         {
             var resumeResponse = await _resumeService.AddResumeAsync(resumeModel.Resume);
-            var quoteResponse = await _quoteService.UpdateQuoteAsync(resumeModel.Quote);
 
-            if (resumeResponse.IsSuccess && quoteResponse.IsSuccess)
+            if (resumeResponse.IsSuccess)
             {
                 return View(nameof(EditResume), resumeModel);
             }

@@ -5,6 +5,7 @@
 @{
 }
 <section class="d-flex align-items-center justify-content-center bg-black text-white w-100 px-3 introQuote">
+    <h2><a id="editBtn" asp-controller="Quotes" asp-action="EditQuotes"><span class="position-absolute end-0 me-3 text-white"><i class="fas fa-pencil fa-2xs"></i></span></a></h2>
     <q cite="@Model.CitationUrl">@Model.Text</q>
     <cite>&#8211 @Model.Author</cite>
 </section>

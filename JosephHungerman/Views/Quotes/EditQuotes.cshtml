@@ -1,0 +1,39 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@model JosephHungerman.Models.ViewModels.QuotesViewModel
+@{
+}
+
+<form method="post" asp-antiforgery="true">
+    <section class="my-2 card">
+        <h3 class="card-header">Quotes</h3>
+        <div class="card-body">
+            @for (int i = 0; i < Model.Quotes.Count; i++)
+            {
+                <div class="card mb-2">
+                    <input asp-for="@Model.Quotes[i].Id" hidden />
+                    <input asp-for="Quotes[i].PageType" hidden />
+                    <div class="card-title ms-2">@Model.Quotes[i].PageType</div>
+                    <div class="card-body">
+                        <div class="input-group mb-1">
+                            <label class="input-group-text col-3 col-md-2">Text: </label>
+                            <textarea asp-for="@Model.Quotes[i].Text" class="form-control"></textarea>
+                        </div>
+                        <div class="input-group mb-1">
+                            <label class="input-group-text col-3 col-md-2">Author: </label>
+                            <input type="text" asp-for="@Model.Quotes[i].Author" class="form-control" />
+                        </div>
+                        <div class="input-group">
+                            <label class="input-group-text col-3 col-md-2">Url: </label>
+                            <input asp-for="@Model.Quotes[i].CitationUrl" class="form-control" />
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </section>
+    <div class="row-cols-auto d-flex justify-content-end mt-lg-1">
+        <button type="submit" class="btn btn-primary col-12 col-lg-auto" asp-action="SaveQuotes"><i class="fas fa-save"></i></button>
+    </div>
+</form>

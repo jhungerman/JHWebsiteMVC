@@ -7,4 +7,6 @@ public interface IQuoteService
 {
     Task<ResponseDto> GetPageQuoteAsync(PageType pageType);
     Task<ResponseDto> UpdateQuoteAsync(Quote resumeModelQuote);
+    Task<ResponseDto> GetPageQuotesAsync();
+    Task<ResponseDto> UpdateQuotesAsync(IList<Quote> quotesViewQuotes);
 }

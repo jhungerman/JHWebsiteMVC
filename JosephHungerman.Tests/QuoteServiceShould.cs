@@ -136,4 +136,135 @@ public class QuoteServiceShould
     }
 
     #endregion
+
+    #region GetPageQuotes
+
+    [Fact]
+    public async void ReturnNotFoundExceptionIfGetQuotesReturnsNull()
+    {
+        List<Quote>? quotes = null;
+        var expectedResponse = new ServiceResponseDtos<List<Quote>>.ServiceNotFoundExceptionResponse();
+
+        _unitOfWork.Setup(x => x.QuoteRepository.GetAsync(It.IsAny<Expression<Func<Quote, bool>>?>(),
+                It.IsAny<Func<IQueryable<Quote>, IOrderedQueryable<Quote>>?>(), It.IsAny<string>()))
+            .ReturnsAsync(quotes);
+
+        var response = await _sut.GetPageQuotesAsync();
+
+        response.Should().BeEquivalentTo(expectedResponse);
+    }
+
+    [Fact]
+    public async void ReturnNotFoundExceptionIfGetQuotesReturnsEmptyList()
+    {
+        List<Quote> quotes = new();
+        var expectedResponse = new ServiceResponseDtos<List<Quote>>.ServiceNotFoundExceptionResponse();
+
+        _unitOfWork.Setup(x => x.QuoteRepository.GetAsync(It.IsAny<Expression<Func<Quote, bool>>?>(),
+                It.IsAny<Func<IQueryable<Quote>, IOrderedQueryable<Quote>>?>(), It.IsAny<string>()))
+            .ReturnsAsync(quotes);
+
+        var response = await _sut.GetPageQuotesAsync();
+
+        response.Should().BeEquivalentTo(expectedResponse);
+    }
+
+    [Fact]
+    public async void ReturnGeneralExceptionIfGetQuotesThrowsException()
+    {
+        var exception = new Exception("FAILED GET");
+        var expectedResponse = new ServiceResponseDtos<List<Quote>>.ServiceExceptionResponse(exception);
+
+        _unitOfWork.Setup(x => x.QuoteRepository.GetAsync(It.IsAny<Expression<Func<Quote, bool>>?>(),
+                It.IsAny<Func<IQueryable<Quote>, IOrderedQueryable<Quote>>?>(), It.IsAny<string>()))
+            .ThrowsAsync(exception);
+
+        var response = await _sut.GetPageQuotesAsync();
+
+        response.Should().BeEquivalentTo(expectedResponse, opt => opt.Excluding(o => o.ErrorMessages));
+    }
+
+    [Fact]
+    public async void ReturnSuccessfulResponseIfGetQuotesIsSuccessful()
+    {
+        List<Quote> quotes = new();
+        quotes.Add((Quote)MockServiceResults.GetQuoteSuccessResult());    
+        var expectedResponse = new ServiceResponseDtos<List<Quote>>.ServiceSuccessResponse(quotes);
+
+        _unitOfWork.Setup(x => x.QuoteRepository.GetAsync(It.IsAny<Expression<Func<Quote, bool>>?>(),
+                It.IsAny<Func<IQueryable<Quote>, IOrderedQueryable<Quote>>?>(), It.IsAny<string>()))
+            .ReturnsAsync(quotes);
+
+        var response = await _sut.GetPageQuotesAsync();
+
+        response.Should().BeEquivalentTo(expectedResponse);
+    }
+
+    #endregion
+
+    #region UpdateQuotes
+
+    [Fact]
+    public async void ReturnSuccessfulResponseIfSaveIsSuccessful()
+    {
+        List<Quote> quotes = new();
+        quotes.Add((Quote)MockServiceResults.GetQuoteSuccessResult());
+
+        var expectedResponse = new ServiceResponseDtos<List<Quote>>.ServiceSuccessResponse(quotes);
+
+        _unitOfWork.Setup(x => x.QuoteRepository.UpdateAllAsync(It.IsAny<List<Quote>>())).ReturnsAsync(quotes);
+        _unitOfWork.Setup(x => x.SaveChangesAsync()).ReturnsAsync(true);
+
+        var response = await _sut.UpdateQuotesAsync(quotes);
+
+        response.Should().BeEquivalentTo(expectedResponse);
+    }
+
+    [Fact]
+    public async void ReturnDbExceptionResponseIfSaveIsUnsuccessful()
+    {
+        List<Quote> quotes = new();
+        quotes.Add((Quote)MockServiceResults.GetQuoteSuccessResult());
+
+        var expectedResponse = new ServiceResponseDtos<List<Quote>>.ServiceDbExceptionResponse();
+
+        _unitOfWork.Setup(x => x.QuoteRepository.UpdateAllAsync(It.IsAny<List<Quote>>())).ReturnsAsync(quotes);
+        _unitOfWork.Setup(x => x.SaveChangesAsync()).ReturnsAsync(false);
+
+        var response = await _sut.UpdateQuotesAsync(quotes);
+
+        response.Should().BeEquivalentTo(expectedResponse);
+    }
+
+    [Fact]
+    public async void ReturnGeneralExceptionResponseWhenUpdateThrowsException()
+    {
+        var exception = new Exception("UPDATE FAILED");
+        List<Quote> quotes = new();
+        quotes.Add((Quote)MockServiceResults.GetQuoteSuccessResult());
+        var expectedResponse = new ServiceResponseDtos<List<Quote>>.ServiceExceptionResponse(exception);
+
+        _unitOfWork.Setup(x => x.QuoteRepository.UpdateAllAsync(It.IsAny<List<Quote>>())).ThrowsAsync(exception);
+
+        var response = await _sut.UpdateQuotesAsync(quotes);
+
+        response.Should().BeEquivalentTo(expectedResponse, opt => opt.Excluding(o => o.ErrorMessages));
+    }
+    [Fact]
+    public async void ReturnGeneralExceptionResponseWhenSaveThrowsException()
+    {
+        var exception = new Exception("UPDATE FAILED");
+        List<Quote> quotes = new();
+        quotes.Add((Quote)MockServiceResults.GetQuoteSuccessResult());
+        var expectedResponse = new ServiceResponseDtos<List<Quote>>.ServiceExceptionResponse(exception);
+
+        _unitOfWork.Setup(x => x.QuoteRepository.UpdateAllAsync(It.IsAny<List<Quote>>())).ReturnsAsync(quotes);
+        _unitOfWork.Setup(x => x.SaveChangesAsync()).ThrowsAsync(exception);
+
+        var response = await _sut.UpdateQuotesAsync(quotes);
+
+        response.Should().BeEquivalentTo(expectedResponse, opt => opt.Excluding(o => o.ErrorMessages));
+    }
+
+    #endregion
 }

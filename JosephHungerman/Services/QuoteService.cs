@@ -53,4 +53,44 @@ public class QuoteService : IQuoteService
             return new ServiceResponseDtos<Quote>.ServiceExceptionResponse(e);
         }
     }
+
+    public async Task<ResponseDto> GetPageQuotesAsync()
+    {
+        try
+        {
+            var quotes = await _unitOfWork.QuoteRepository.GetAsync();
+
+            if (quotes != null && quotes.Any())
+            {
+                return new ServiceResponseDtos<List<Quote>>.ServiceSuccessResponse(quotes.ToList());
+            }
+
+            return new ServiceResponseDtos<List<Quote>>.ServiceNotFoundExceptionResponse();
+        }
+        catch (Exception e)
+        {
+            return new ServiceResponseDtos<List<Quote>>.ServiceExceptionResponse(e);
+        }
+    }
+
+    public async Task<ResponseDto> UpdateQuotesAsync(IList<Quote> quotesViewQuotes)
+    {
+        try
+        {
+            var response = await _unitOfWork.QuoteRepository.UpdateAllAsync(quotesViewQuotes);
+
+            var saveSuccessful = await _unitOfWork.SaveChangesAsync();
+
+            if (saveSuccessful)
+            {
+                return new ServiceResponseDtos<List<Quote>>.ServiceSuccessResponse(response.ToList());
+            }
+
+            return new ServiceResponseDtos<List<Quote>>.ServiceDbExceptionResponse();
+        }
+        catch (Exception e)
+        {
+            return new ServiceResponseDtos<List<Quote>>.ServiceExceptionResponse(e);
+        }
+    }
 }

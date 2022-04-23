@@ -58,9 +58,8 @@ namespace JosephHungerman.Controllers
         {
             ModelState.Clear();
             var aboutResponse = await _aboutService.UpdateSectionsAsync(aboutView.Sections);
-            var quoteResponse = await _quoteService.UpdateQuoteAsync(aboutView.Quote);
 
-            if (aboutResponse.IsSuccess && quoteResponse.IsSuccess)
+            if (aboutResponse.IsSuccess)
             {
                 return View(nameof(EditAbout), aboutView);
             }
