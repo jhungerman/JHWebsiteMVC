@@ -7,6 +7,7 @@
     @await Html.PartialAsync("_QuotePartial", Model.Quote)
 }
 
+<div class="container">
 @if (User.Identity.IsAuthenticated)
 {
     <section class="container-fluid my-2 d-flex flex-column flex-md-row justify-content-md-evenly justify-content-lg-between">
@@ -157,3 +158,4 @@ else
             </div>
         }
     </section>
+</div>

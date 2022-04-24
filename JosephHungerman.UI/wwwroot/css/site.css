@@ -38,6 +38,15 @@ footer {
     margin: 0;
 }
 
+#homeImage {
+    width: 100vw;
+    max-height: 100vh;
+}
+
+#homeCaption {
+    position: relative;
+}
+
 #jacaruTechCopy {
     font-family: 'Source Code Pro';
 }

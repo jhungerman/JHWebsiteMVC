@@ -5,6 +5,8 @@
 @section Quotes {
     @await Html.PartialAsync("_QuotePartial", Model.Quote)
 }
+
+<div class="container">
 <form method="post">
     <div class="mb-3 row">
         <label class="col-form-label">Name*:</label>
@@ -40,6 +42,7 @@
         <button id="submit_form" type="submit" class="btn btn-primary ms-1" asp-controller="Contact" asp-action="SendMessage" data-callback="onSubmit" disabled>Submit</button>
     </div>
 </form>
+</div>
 
 @section Scripts {
     @{
