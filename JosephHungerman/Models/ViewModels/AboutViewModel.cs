@@ -1,4 +1,4 @@
-﻿using JosephHungerman.Models.About;
+﻿using JosephHungerman.Data.Models;
 
 namespace JosephHungerman.Models.ViewModels
 {

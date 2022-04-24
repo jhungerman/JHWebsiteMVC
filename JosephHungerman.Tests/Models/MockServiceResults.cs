@@ -1,11 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
-using JosephHungerman.Models;
-using JosephHungerman.Models.About;
-using JosephHungerman.Models.Contact;
+using JosephHungerman.Data.Models;
 using JosephHungerman.Models.Dtos.Contact;
-using JosephHungerman.Models.Work;
 
 namespace JosephHungerman.Tests.Models
 {

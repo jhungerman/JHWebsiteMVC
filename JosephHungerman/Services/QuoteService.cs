@@ -1,5 +1,5 @@
-﻿using JosephHungerman.Data.Repositories;
-using JosephHungerman.Models;
+﻿using JosephHungerman.Data.Models;
+using JosephHungerman.Data.Repositories;
 using JosephHungerman.Models.Dtos;
 using JosephHungerman.Services.Interfaces;
 

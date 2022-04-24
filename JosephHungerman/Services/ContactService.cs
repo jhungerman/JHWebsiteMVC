@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
+using JosephHungerman.Data.Models;
 using JosephHungerman.Data.Repositories;
-using JosephHungerman.Models.Contact;
 using JosephHungerman.Models.Dtos;
 using JosephHungerman.Models.Dtos.Contact;
 using JosephHungerman.Services.Interfaces;

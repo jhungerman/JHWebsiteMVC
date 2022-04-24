@@ -3,12 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using FluentAssertions;
+using JosephHungerman.Data.Models;
 using JosephHungerman.Data.Repositories;
 using JosephHungerman.Models.Dtos;
-using JosephHungerman.Models.Work;
 using JosephHungerman.Services;
 using JosephHungerman.Tests.Models;
-using Microsoft.AspNetCore.Http.Features;
 using Moq;
 using Xunit;
 

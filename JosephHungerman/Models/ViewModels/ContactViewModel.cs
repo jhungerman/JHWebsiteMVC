@@ -1,4 +1,4 @@
-﻿using JosephHungerman.Models.Contact;
+﻿using JosephHungerman.Data.Models;
 
 namespace JosephHungerman.Models.ViewModels
 {

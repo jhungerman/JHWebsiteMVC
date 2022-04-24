@@ -1,11 +1,8 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 using JosephHungerman.Core.Options;
-using JosephHungerman.Data;
-using JosephHungerman.Data.Repositories;
 using JosephHungerman.Helpers;
 using JosephHungerman.Services;
 using JosephHungerman.Services.Interfaces;
-using Microsoft.EntityFrameworkCore;
 using SendGrid.Extensions.DependencyInjection;
 
 namespace JosephHungerman.Extensions
@@ -27,23 +24,12 @@ namespace JosephHungerman.Extensions
                     ? configuration.GetSection("Email:JshProd:ApiKey").Value
                     : configuration.GetSection("Email:JshDev:ApiKey").Value;
             });
-            services.AddDbContext<ApplicationDbContext>(options =>
-            {
-                options.UseMySql(
-                    configuration.GetConnectionString("JshStage"),
-                    new MariaDbServerVersion(new Version(10, 3)));
-            });
-            services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddScoped<IContactService, ContactService>();
             services.AddScoped<IEmailService, EmailService>();
             services.AddScoped<ICaptchaService, CaptchaService>();
             services.AddScoped<IResumeService, ResumeService>();
             services.AddScoped<IQuoteService, QuoteService>();
             services.AddScoped<IAboutService, AboutService>();
-            services.AddScoped<DbInitializer>();
-
-            using var dbinit = services.BuildServiceProvider().GetRequiredService<ApplicationDbContext>();
-            DbInitializer.SeedResumeData(dbinit).Wait();
 
             return services;
         }

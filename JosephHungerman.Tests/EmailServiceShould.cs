@@ -4,7 +4,6 @@ using System.Net;
 using System.Net.Http;
 using System.Threading;
 using FluentAssertions;
-using JosephHungerman.Core.Options;
 using JosephHungerman.Models.Dtos;
 using JosephHungerman.Models.Dtos.Contact;
 using JosephHungerman.Services;

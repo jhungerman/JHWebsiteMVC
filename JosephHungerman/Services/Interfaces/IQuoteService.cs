@@ -1,4 +1,4 @@
-﻿using JosephHungerman.Models;
+﻿using JosephHungerman.Data.Models;
 using JosephHungerman.Models.Dtos;
 
 namespace JosephHungerman.Services.Interfaces;

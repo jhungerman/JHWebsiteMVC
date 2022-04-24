@@ -4,19 +4,14 @@ using Microsoft.AspNetCore.Authentication.OpenIdConnect;
 using Microsoft.Identity.Web;
 using Microsoft.Identity.Web.UI;
 using Azure.Identity;
+using JosephHungerman.Data.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
-var keyVaultEndpoint = new Uri(Environment.GetEnvironmentVariable("VaultUri"));
+var keyVaultEndpoint = new Uri(builder.Configuration.GetSection("VaultUri").Value);
 builder.Configuration.AddAzureKeyVault(keyVaultEndpoint, new DefaultAzureCredential());
-//builder.Host.ConfigureAppConfiguration((_, config) =>
-//{
-//    var settings = config.Build();
-
-//    var keyVaultEndpoint = settings["KV_URI"];
-
-//    config.AddAzureKeyVault(new Uri(keyVaultEndpoint), new DefaultAzureCredential(), new KeyVaultSecretManager());
-//});
+builder.Services.AddApplicationServices(builder.Configuration);
+builder.Services.AddDataServices(builder.Configuration);
 
 // Add services to the container.
 builder.Services.AddAuthentication(OpenIdConnectDefaults.AuthenticationScheme)
@@ -27,9 +22,8 @@ builder.Services.AddControllersWithViews().AddJsonOptions(options =>
     options.JsonSerializerOptions.PropertyNamingPolicy = JsonNamingPolicy.CamelCase;
 }).AddMicrosoftIdentityUI();
 builder.Services.AddApplicationServices(builder.Configuration);
+builder.Services.AddDataServices(builder.Configuration);
 
-//var endpoint = new Uri(Environment.GetEnvironmentVariable("KV_URI") ?? string.Empty);
-//builder.Configuration.AddAzureKeyVault(endpoint, new DefaultAzureCredential(), new KeyVaultSecretManager());
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(options =>

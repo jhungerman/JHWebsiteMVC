@@ -1,5 +1,5 @@
-﻿using JosephHungerman.Models.Dtos;
-using JosephHungerman.Models.Work;
+﻿using JosephHungerman.Data.Models;
+using JosephHungerman.Models.Dtos;
 
 namespace JosephHungerman.Services.Interfaces;
 

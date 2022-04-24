@@ -1,8 +1,7 @@
-﻿using JosephHungerman.Data.Repositories;
-using JosephHungerman.Models.About;
+﻿using JosephHungerman.Data.Models;
+using JosephHungerman.Data.Repositories;
 using JosephHungerman.Models.Dtos;
 using JosephHungerman.Services.Interfaces;
-using Microsoft.Extensions.Azure;
 
 namespace JosephHungerman.Services
 {

@@ -1,6 +1,6 @@
-﻿using JosephHungerman.Models;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
+using JosephHungerman.Data.Models;
 using JosephHungerman.Models.ViewModels;
 using JosephHungerman.Services.Interfaces;
 
