@@ -1,7 +1,7 @@
 ﻿using JosephHungerman.Data.Models;
-using JosephHungerman.Models.Dtos;
+using JosephHungerman.Services.Models.Dtos;
 
-namespace JosephHungerman.Services.Interfaces;
+namespace JosephHungerman.Services.Services.Interfaces;
 
 public interface IAboutService
 {

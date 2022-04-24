@@ -1,6 +1,6 @@
 using Xunit;
 
-namespace JosephHungerman.Tests
+namespace JosephHungerman.Services.Tests
 {
     public class ContactControllerShould
     {

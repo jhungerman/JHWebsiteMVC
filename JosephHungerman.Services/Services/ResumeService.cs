@@ -1,9 +1,9 @@
 ﻿using JosephHungerman.Data.Models;
 using JosephHungerman.Data.Repositories;
-using JosephHungerman.Models.Dtos;
-using JosephHungerman.Services.Interfaces;
+using JosephHungerman.Services.Models.Dtos;
+using JosephHungerman.Services.Services.Interfaces;
 
-namespace JosephHungerman.Services;
+namespace JosephHungerman.Services.Services;
 
 public class ResumeService : IResumeService
 {

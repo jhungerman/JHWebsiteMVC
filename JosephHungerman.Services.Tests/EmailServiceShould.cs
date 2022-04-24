@@ -4,18 +4,18 @@ using System.Net;
 using System.Net.Http;
 using System.Threading;
 using FluentAssertions;
-using JosephHungerman.Models.Dtos;
-using JosephHungerman.Models.Dtos.Contact;
-using JosephHungerman.Services;
-using JosephHungerman.Services.Interfaces;
+using JosephHungerman.Services.Models.Dtos;
+using JosephHungerman.Services.Services;
+using JosephHungerman.Services.Services.Interfaces;
+using JosephHungerman.Services.Settings;
 using Microsoft.Extensions.Options;
 using Moq;
 using SendGrid;
 using SendGrid.Helpers.Mail;
 using Xunit;
-using MailSettings = JosephHungerman.Core.Options.MailSettings;
+using MailSettings = JosephHungerman.Services.Settings.MailSettings;
 
-namespace JosephHungerman.Tests
+namespace JosephHungerman.Services.Tests
 {
     public class EmailServiceShould
     {

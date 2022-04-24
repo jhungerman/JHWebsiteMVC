@@ -1,6 +1,6 @@
 ﻿using System.Text.Json.Serialization;
 
-namespace JosephHungerman.Models.Contact
+namespace JosephHungerman.Services.Models
 {
     public class CaptchaVerificationResponse
     {

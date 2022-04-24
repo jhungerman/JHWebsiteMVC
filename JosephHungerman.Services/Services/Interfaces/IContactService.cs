@@ -1,7 +1,6 @@
-﻿using JosephHungerman.Models.Dtos;
-using JosephHungerman.Models.Dtos.Contact;
+﻿using JosephHungerman.Services.Models.Dtos;
 
-namespace JosephHungerman.Services.Interfaces
+namespace JosephHungerman.Services.Services.Interfaces
 {
     public interface IContactService
     {

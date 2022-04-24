@@ -2,7 +2,7 @@
 using System.Diagnostics;
 using JosephHungerman.Data.Models;
 using JosephHungerman.Models.ViewModels;
-using JosephHungerman.Services.Interfaces;
+using JosephHungerman.Services.Services.Interfaces;
 
 namespace JosephHungerman.Controllers
 {

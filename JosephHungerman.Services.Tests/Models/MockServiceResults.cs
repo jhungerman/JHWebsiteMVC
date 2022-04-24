@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using JosephHungerman.Data.Models;
-using JosephHungerman.Models.Dtos.Contact;
+using JosephHungerman.Services.Models.Dtos;
 
-namespace JosephHungerman.Tests.Models
+namespace JosephHungerman.Services.Tests.Models
 {
     [ExcludeFromCodeCoverage]
     public class MockServiceResults

@@ -1,11 +1,13 @@
 ﻿using System.Diagnostics.CodeAnalysis;
-using JosephHungerman.Core.Options;
 using JosephHungerman.Helpers;
-using JosephHungerman.Services;
-using JosephHungerman.Services.Interfaces;
+using JosephHungerman.Services.Services;
+using JosephHungerman.Services.Services.Interfaces;
+using JosephHungerman.Services.Settings;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 using SendGrid.Extensions.DependencyInjection;
 
-namespace JosephHungerman.Extensions
+namespace JosephHungerman.Services.Extensions
 {
     [ExcludeFromCodeCoverage]
     public static class ServiceCollectionExtensions

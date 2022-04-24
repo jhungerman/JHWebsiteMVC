@@ -1,10 +1,11 @@
 ﻿using System.Text.Json;
-using JosephHungerman.Core.Options;
-using JosephHungerman.Models.Contact;
-using JosephHungerman.Services.Interfaces;
+using JosephHungerman.Services.Models;
+using JosephHungerman.Services.Services.Interfaces;
+using JosephHungerman.Services.Settings;
+using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 
-namespace JosephHungerman.Services;
+namespace JosephHungerman.Services.Services;
 
 public class CaptchaService : ICaptchaService
 {

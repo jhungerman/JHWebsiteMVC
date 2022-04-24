@@ -1,7 +1,7 @@
 ﻿using JosephHungerman.Data.Models;
-using JosephHungerman.Models.Dtos.Contact;
 using JosephHungerman.Models.ViewModels;
-using JosephHungerman.Services.Interfaces;
+using JosephHungerman.Services.Models.Dtos;
+using JosephHungerman.Services.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace JosephHungerman.Controllers

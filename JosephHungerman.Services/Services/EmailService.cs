@@ -1,12 +1,11 @@
-﻿using JosephHungerman.Models.Dtos;
-using JosephHungerman.Models.Dtos.Contact;
-using JosephHungerman.Services.Interfaces;
+﻿using JosephHungerman.Services.Models.Dtos;
+using JosephHungerman.Services.Services.Interfaces;
 using Microsoft.Extensions.Options;
 using SendGrid;
 using SendGrid.Helpers.Mail;
-using MailSettings = JosephHungerman.Core.Options.MailSettings;
+using MailSettings = JosephHungerman.Services.Settings.MailSettings;
 
-namespace JosephHungerman.Services
+namespace JosephHungerman.Services.Services
 {
     public class EmailService : IEmailService
     {

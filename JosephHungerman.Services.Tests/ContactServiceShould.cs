@@ -6,15 +6,14 @@ using AutoMapper;
 using FluentAssertions;
 using JosephHungerman.Data.Models;
 using JosephHungerman.Data.Repositories;
-using JosephHungerman.Models.Dtos;
-using JosephHungerman.Models.Dtos.Contact;
-using JosephHungerman.Services;
-using JosephHungerman.Services.Interfaces;
-using JosephHungerman.Tests.Models;
+using JosephHungerman.Services.Models.Dtos;
+using JosephHungerman.Services.Services;
+using JosephHungerman.Services.Services.Interfaces;
+using JosephHungerman.Services.Tests.Models;
 using Moq;
 using Xunit;
 
-namespace JosephHungerman.Tests
+namespace JosephHungerman.Services.Tests
 {
     public class ContactServiceShould
     {

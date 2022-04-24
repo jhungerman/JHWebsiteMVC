@@ -1,10 +1,10 @@
 using System.Text.Json;
-using JosephHungerman.Extensions;
 using Microsoft.AspNetCore.Authentication.OpenIdConnect;
 using Microsoft.Identity.Web;
 using Microsoft.Identity.Web.UI;
 using Azure.Identity;
 using JosephHungerman.Data.Extensions;
+using JosephHungerman.Services.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 

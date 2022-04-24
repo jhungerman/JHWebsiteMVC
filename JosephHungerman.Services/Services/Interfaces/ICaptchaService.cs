@@ -1,4 +1,4 @@
-﻿namespace JosephHungerman.Services.Interfaces;
+﻿namespace JosephHungerman.Services.Services.Interfaces;
 
 public interface ICaptchaService
 {

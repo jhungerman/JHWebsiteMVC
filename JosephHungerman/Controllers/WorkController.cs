@@ -1,6 +1,6 @@
 ﻿using JosephHungerman.Data.Models;
 using JosephHungerman.Models.ViewModels;
-using JosephHungerman.Services.Interfaces;
+using JosephHungerman.Services.Services.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 

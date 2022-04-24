@@ -6,13 +6,13 @@ using System.Threading.Tasks;
 using FluentAssertions;
 using JosephHungerman.Data.Models;
 using JosephHungerman.Data.Repositories;
-using JosephHungerman.Models.Dtos;
-using JosephHungerman.Services;
-using JosephHungerman.Tests.Models;
+using JosephHungerman.Services.Models.Dtos;
+using JosephHungerman.Services.Services;
+using JosephHungerman.Services.Tests.Models;
 using Moq;
 using Xunit;
 
-namespace JosephHungerman.Tests;
+namespace JosephHungerman.Services.Tests;
 
 public class AboutServiceShould
 {

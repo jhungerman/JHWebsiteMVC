@@ -1,4 +1,4 @@
-﻿namespace JosephHungerman.Core.Options
+﻿namespace JosephHungerman.Services.Settings
 {
     public class CaptchaSettings
     {
