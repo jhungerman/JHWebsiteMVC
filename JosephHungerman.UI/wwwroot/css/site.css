@@ -20,6 +20,8 @@ body {
 
 footer {
     font-family: "Courier New";
+    position: absolute;
+    bottom: 0;
 }
 
 .introQuote {

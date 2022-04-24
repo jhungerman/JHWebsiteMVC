@@ -47,10 +47,11 @@
                             <li class="nav-item">
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Contact" asp-action="Contact">Contact</a>
                             </li>
-@*                            <li class="nav-item">
+                            @*                            <li class="nav-item">
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Blog" hidden>Blog</a>
-                            </li>
-*@                        </ul>
+                                </li>
+                            *@
+                        </ul>
                     </div>
                     <div>
                         <form method="post" class="d-flex">
@@ -64,19 +65,22 @@
             </div>
         </nav>
     </header>
-<div class="w-100">
-    @await RenderSectionAsync("Quotes", false)
-</div>
+    <div class="w-100">
+        @await RenderSectionAsync("Quotes", false)
+    </div>
     <div class="container">
         <main role="main" class="pb-3">
             @RenderBody()
         </main>
     </div>
 
-    <footer class="border-top footer text-muted d-flex justify-content-between container-fluid">
-        <strong class="text-black">&copy; 2022 - Joseph Hungerman</strong>
-        <a class="btn btn-primary h-50 my-auto" href="https://www.linkedin.com/in/joseph-hungerman-csm-66468842" target="_blank"><i class="fa-brands fa-linkedin-in"></i></a>
-        </footer>
+    <footer class="border-top text-muted container-fluid">
+        <div class="d-flex justify-content-between w-100 h-100 mt-auto align-items-center py-2">
+            <h6 class="d-block"><strong class="text-black">&copy; 2022 - Joseph Hungerman</strong></h6>
+            <a class="btn btn-primary h-50 my-auto" href="https://www.linkedin.com/in/joseph-hungerman-csm-66468842" target="_blank"><i class="fa-brands fa-linkedin-in"></i></a>
+        </div>
+
+    </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/lib/font-awesome/js/all.min.js"></script>
