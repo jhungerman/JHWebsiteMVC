@@ -9,14 +9,16 @@
 
 @if (User.Identity.IsAuthenticated)
 {
-    <div class="container-fluid mt-2">
-        <h1 class="text-center">@Model.Resume.Name<a id="editBtn" asp-action="EditResume"><span class="position-absolute end-0 me-3 text-black"><i class="fas fa-pencil fa-2xs"></i></span></a></h1>
+    <div class="container-fluid my-2 d-flex flex-column flex-md-row justify-content-md-evenly justify-content-lg-between">
+        <img class="img-thumbnail" src="~/img/hun_0896bw.jpg"/>
+        <h1 class="d-flex align-items-md-center justify-content-center">@Model.Resume.Name<a id="editBtn" asp-action="EditResume"><span class="position-absolute end-0 me-3 text-black"><i class="fas fa-pencil fa-2xs"></i></span></a></h1>
     </div>
 }
 else
 {
-    <div class="container-fluid mt-2">
-        <h1 class="text-center">@Model.Resume.Name</h1>
+    <div class="container-fluid my-2 d-flex flex-column flex-md-row justify-content-md-evenly justify-content-lg-between">
+        <img class="img-thumbnail" src="~/img/hun_0896bw.jpg"/>
+        <h1 class="d-flex align-items-md-center justify-content-center">@Model.Resume.Name</h1>
     </div>
 }
 
