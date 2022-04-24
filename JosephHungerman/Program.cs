@@ -10,8 +10,6 @@ var builder = WebApplication.CreateBuilder(args);
 
 var keyVaultEndpoint = new Uri(builder.Configuration.GetSection("VaultUri").Value);
 builder.Configuration.AddAzureKeyVault(keyVaultEndpoint, new DefaultAzureCredential());
-builder.Services.AddApplicationServices(builder.Configuration);
-builder.Services.AddDataServices(builder.Configuration);
 
 // Add services to the container.
 builder.Services.AddAuthentication(OpenIdConnectDefaults.AuthenticationScheme)

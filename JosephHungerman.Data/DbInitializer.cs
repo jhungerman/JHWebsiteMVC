@@ -1,4 +1,5 @@
-﻿using System.Text.Json;
+﻿using System.Reflection;
+using System.Text.Json;
 using JosephHungerman.Data.Models;
 
 namespace JosephHungerman.Data
@@ -10,7 +11,7 @@ namespace JosephHungerman.Data
             await context.Database.EnsureCreatedAsync();
             if (!context.Resumes.Any())
             {
-                using StreamReader reader = new(@"Data\resumeseed.json");
+                using StreamReader reader = new(@"..\JosephHungerman.Data\Seeds\resumeseed.json");
                 string json = await reader.ReadToEndAsync();
                 Resume resume = JsonSerializer.Deserialize<Resume>(json);
 
@@ -20,7 +21,7 @@ namespace JosephHungerman.Data
 
             if (!context.Quotes.Any())
             {
-                using StreamReader reader = new(@"Data\quoteseed.json");
+                using StreamReader reader = new(@"..\JosephHungerman.Data\Seeds\quoteseed.json");
                 string json = await reader.ReadToEndAsync();
                 List<Quote> quotes = JsonSerializer.Deserialize<List<Quote>>(json);
 
@@ -30,7 +31,7 @@ namespace JosephHungerman.Data
 
             if (!context.Sections.Any())
             {
-                using StreamReader reader = new(@"Data\aboutseed.json");
+                using StreamReader reader = new(@"..\JosephHungerman.Data\Seeds\aboutseed.json");
                 string json = await reader.ReadToEndAsync();
                 List<Section> sections = JsonSerializer.Deserialize<List<Section>>(json);
 
