@@ -15,11 +15,11 @@ html {
 
 body {
     margin-bottom: 60px;
-    font-family: helvetica;
+    font-family: "Montserrat", sans-serif;
 }
 
 footer {
-    font-family: "Courier New";
+    font-family: "Montserrat", sans-serif;
     position: absolute;
     bottom: 0;
 }
@@ -38,6 +38,10 @@ footer {
     margin: 0;
 }
 
+#jacaruTechCopy {
+    font-family: 'Source Code Pro';
+}
+
 #devops {
     max-height: 15px;
 }
@@ -48,7 +52,7 @@ footer {
 }
 
 #divider {
-    background-color: #EAF1DD;
+    background-color: #F0F0F0;
     height: 20px;
     border-top: 2px solid black;
     border-bottom: 2px solid black;
@@ -57,7 +61,13 @@ footer {
 
 /*Media Queries*/
 @media only screen and (max-width: 360px) {
-    #credentialLabel {
+    #credentialLabel, #nameCopy {
+        display: none;
+    }
+}
+
+@media only screen and (max-width: 820px) {
+    #credentialLabel, #backendCopy {
         display: none;
     }
 }

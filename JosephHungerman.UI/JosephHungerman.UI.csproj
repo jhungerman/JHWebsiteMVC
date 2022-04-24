@@ -39,6 +39,7 @@
 
   <ItemGroup>
     <Folder Include="Models\Dtos\Work\" />
+    <Folder Include="wwwroot\fonts\" />
   </ItemGroup>
 
   <ItemGroup>

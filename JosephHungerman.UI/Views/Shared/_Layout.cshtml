@@ -6,6 +6,12 @@
     <title>Joseph Hungerman</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/lib/font-awesome/css/all.min.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:ital,wght@0,200;0,300;0,400;0,500;1,200;1,300;1,400;1,500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/JosephHungerman.styles.css" asp-append-version="true" />
 </head>
@@ -24,14 +30,14 @@
                     <div>
                         <ul class="navbar-nav flex-grow-1">
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-controller="Home" asp-action="Index">Home</a>
+                                <a class="nav-link text-dark" asp-controller="Home" asp-action="Index">.home</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-controller="About" asp-action="About">About</a>
+                                <a class="nav-link text-dark" asp-controller="About" asp-action="About">.about</a>
                             </li>
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                    Work
+                                    .work
                                 </a>
                                 <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                                     <li>
@@ -45,7 +51,7 @@
                                 </ul>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Contact" asp-action="Contact">Contact</a>
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Contact" asp-action="Contact">.contact</a>
                             </li>
                             @*                            <li class="nav-item">
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Blog" hidden>Blog</a>
@@ -74,12 +80,20 @@
         </main>
     </div>
 
-    <footer class="border-top text-muted container-fluid">
-        <div class="d-flex justify-content-between w-100 h-100 mt-auto align-items-center py-2">
-            <h6 class="d-block"><strong class="text-black">&copy; 2022 - Joseph Hungerman</strong></h6>
-            <a class="btn btn-primary h-50 my-auto" href="https://www.linkedin.com/in/joseph-hungerman-csm-66468842" target="_blank"><i class="fa-brands fa-linkedin-in"></i></a>
-        </div>
-
+    <footer class="border-top text-muted container-fluid footer">
+        <table class="w-100 h-100 table table-responsive mb-0">
+            <tr class="border-0 border-white">
+                <td class="col-3 align-middle text-center">
+                    <h6 class="d-block"><strong class="text-black">&copy; 2022 <span id="nameCopy">- Joseph Hungerman</span></strong></h6>
+                </td>
+                <td class="col-3 align-middle text-center">
+                    <h6><span id="backendCopy">Backend design by </span><span id="jacaruTechCopy">JACARU{<strong>TECH</strong>}</span></h6>
+                </td>
+                <td class="col-3 text-end align-middle">
+                    <a class="btn btn-primary my-auto me-4" href="https://www.linkedin.com/in/joseph-hungerman-csm-66468842" target="_blank"><i class="fa-brands fa-linkedin-in"></i></a>
+                </td>
+            </tr>
+        </table>
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
