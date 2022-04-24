@@ -1,0 +1,90 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Joseph Hungerman</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/lib/font-awesome/css/all.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/JosephHungerman.styles.css" asp-append-version="true" />
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow">
+            <div class="container-fluid">
+                <a class="navbar-brand border-2" asp-area="" asp-controller="Home" asp-action="Index" id="name-lg">
+                    <h2>J|H</h2>
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                    <div>
+                        <ul class="navbar-nav flex-grow-1">
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-controller="Home" asp-action="Index">Home</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-controller="About" asp-action="About">About</a>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    Work
+                                </a>
+                                <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                                    <li>
+                                        <div>
+                                            <a class="dropdown-item text-black" asp-controller="Work" asp-action="Resume"><i class="fas fa-file me-2"></i><span>Resume</span></a>
+                                        </div>
+                                    </li>
+                                    <li hidden><a class="dropdown-item text-black" href="#"><img src="~/img/devops.png" class="img-fluid me-1" id="devops" />Azure Repos</a></li>
+                                    <li><a class="dropdown-item text-black" href="https://github.com/jhungerman" target="_blank"><i class="fa-brands fa-github me-1"></i>GitHub Repos</a></li>
+                                    <li><a class="dropdown-item text-black" href="https://www.jacaruco.com" target="_blank"><i class="fa-brands fa-chrome me-1"></i>Jacaru Co Website</a></li>
+                                </ul>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Contact" asp-action="Contact">Contact</a>
+                            </li>
+                            @*                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Blog" hidden>Blog</a>
+                                </li>
+                            *@
+                        </ul>
+                    </div>
+                    <div>
+                        <form method="post" class="d-flex">
+                            <input class="form-control me-1" placeholder="Search" type="search" hidden />
+                            <button class="btn btn-primary" type="submit" hidden><i class="fas fa-search"></i></button>
+                        </form>
+                    </div>
+                    <partial name="_LoginPartial" />
+
+                </div>
+            </div>
+        </nav>
+    </header>
+    <div class="w-100">
+        @await RenderSectionAsync("Quotes", false)
+    </div>
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer class="border-top text-muted container-fluid">
+        <div class="d-flex justify-content-between w-100 h-100 mt-auto align-items-center py-2">
+            <h6 class="d-block"><strong class="text-black">&copy; 2022 - Joseph Hungerman</strong></h6>
+            <a class="btn btn-primary h-50 my-auto" href="https://www.linkedin.com/in/joseph-hungerman-csm-66468842" target="_blank"><i class="fa-brands fa-linkedin-in"></i></a>
+        </div>
+
+    </footer>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/lib/font-awesome/js/all.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

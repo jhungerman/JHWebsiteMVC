@@ -1,0 +1,174 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@using JosephHungerman.Data.Models
+@model JosephHungerman.Models.ViewModels.ResumeViewModel
+@{
+
+}
+<form method="post" asp-antiforgery="true">
+    <section class="card">
+        <h3 class="card-header">Resume</h3>
+        <div class="card-body">
+            <input asp-for="Resume.Timestamp" hidden value="@DateTime.Now"/>
+            <input asp-for="Resume.Name" hidden />
+            <div class="input-group mb-1">
+                <label class="input-group-text col-3 col-md-2">Summary: </label>
+                <textarea asp-for="Resume.Summary" class="form-control" rows="5"></textarea>
+            </div>
+            <div class="d-flex justify-content-between mb-1">
+                <label class="form-label">Skills & Proficiencies: </label>
+                <button class="btn btn-outline-success border-0" asp-action="AddSkill"><i class="fas fa-plus-circle"></i></button>
+            </div>
+            @for (int i = 0; i < @Model.Resume.Skills.Count; i++)
+            {
+                <div class="card mb-2">
+                    <div class="card-body">
+                        <div class="input-group mb-1">
+                            <label class="input-group-text col-3 col-md-2">Name:</label>
+                            <input class="form-control" asp-for="@Model.Resume.Skills[i].Name"/>
+                        </div>
+                        <div class="input-group mb-1">
+                            <label class="input-group-text col-3 col-md-2">Type:</label>
+                            <select class="form-select" asp-for="@Model.Resume.Skills[i].SkillType">
+                                @foreach (var type in Enum.GetValues(typeof(SkillType)))
+                                {
+                                    <option>@type.ToString()</option>
+                                }
+                            </select>
+                        </div>
+                        <div class="d-flex justify-content-between">
+                            <div class="input-group mb-1">
+                                <label class="form-check-label col-3 col-md-2">Key Skill:</label>
+                                <input class="form-check" asp-for="@Model.Resume.Skills[i].IsKeySkill"/>
+                            </div>
+                            <button class="btn btn-outline-danger border-0" asp-action="RemoveSkill" asp-route-index="@i"><i class="fas fa-trash"></i></button>
+                        </div>
+                    </div>
+                </div>
+            }
+            <div class="d-flex justify-content-between mb-1">
+                <label class="form-label">Work Experiences: </label>
+                <button class="btn btn-outline-success border-0" asp-action="AddWorkExperience"><i class="fas fa-plus-circle"></i></button>
+            </div>
+            @for (int i = 0; i < @Model.Resume.WorkExperiences.Count; i++)
+            {
+                <div class="row d-flex">
+                   <div class="col-12">
+                        <div class="mb-2 card">
+                            <div class="card-body">
+                                <div class="d-flex mb-1 justify-content-end"><button class="btn btn-danger" asp-action="RemoveWorkExperience" asp-route-index="@i"><i class="fas fa-trash"></i></button></div>
+                                <div class="input-group mb-1">
+                                    <label class="input-group-text col-3 col-md-2">Co: </label>
+                                    <input class="form-control" asp-for="@Model.Resume.WorkExperiences[i].CompanyName"/>
+                                </div>
+                                <div class="input-group mb-1">
+                                    <label class="input-group-text col-3 col-md-2">City: </label>
+                                    <input class="form-control" asp-for="@Model.Resume.WorkExperiences[i].CompanyCity"/>
+                                </div>
+                                <div class="input-group mb-1">
+                                    <label class="input-group-text col-3 col-md-2">State: </label>
+                                    <input class="form-control" asp-for="@Model.Resume.WorkExperiences[i].CompanyState"/>
+                                </div>
+                                <div class="input-group mb-1">
+                                    <label class="input-group-text col-3 col-md-2">Url: </label>
+                                    <input class="form-control" asp-for="@Model.Resume.WorkExperiences[i].CompanyUrl"/>
+                                </div>
+                                <div class="input-group mb-1">
+                                    <label class="input-group-text col-3 col-md-2">Start: </label>
+                                    <input class="form-control" asp-for="@Model.Resume.WorkExperiences[i].StartDate"/>
+                                </div>
+                                <div class="input-group mb-1">
+                                    <label class="input-group-text col-3 col-md-2">End: </label>
+                                    <input class="form-control" asp-for="@Model.Resume.WorkExperiences[i].EndDate"/>
+                                </div>
+                                <div class="input-group mb-1">
+                                    <label class="input-group-text col-3 col-md-2">Title: </label>
+                                    <input class="form-control" asp-for="@Model.Resume.WorkExperiences[i].Title"/>
+                                </div>
+                                <div class="d-flex justify-content-between mb-1">
+                                    <label class="form-label">Details: </label>
+                                    <button class="btn btn-outline-success border-0" asp-action="AddWorkDetail" asp-route-data-workExperienceId="@i"><i class="fas fa-plus-circle"></i></button>
+                                </div>
+                                @for (int j = 0; j < Model.Resume.WorkExperiences[i].WorkDetails.Count; j++)
+                                {
+                                    <div class="d-flex">
+                                        <textarea class="form-control mb-1" asp-for="Resume.WorkExperiences[i].WorkDetails[j].Detail"></textarea>
+                                        <button class="btn btn-outline-danger border-0" asp-action="RemoveWorkDetail" asp-route-workIndex="@i" asp-route-detailIndex="@j"><i class="fas fa-trash"></i></button>
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+            <div class="d-flex justify-content-between mb-1">
+                <label class="form-label">Education: </label>
+                <button class="btn btn-outline-success border-0" asp-action="AddEducation"><i class="fas fa-plus-circle"></i></button>
+            </div>
+            @for (int i = 0; i < Model.Resume.Educations.Count; i++)
+            {
+                <div class="card mb-2">
+                    <div class="card-body">
+                        <div class="d-flex mb-1 justify-content-end"><button class="btn btn-danger" asp-action="RemoveEducation" asp-route-index="@i"><i class="fas fa-trash"></i></button></div>
+                        <div class="input-group mb-1">
+                            <label class="input-group-text col-3 col-md-2">School: </label>
+                            <input class="form-control" asp-for="Resume.Educations[i].InstitutionName"/>
+                        </div>
+                        <div class="input-group mb-1">
+                            <label class="input-group-text col-3 col-md-2">Url: </label>
+                            <input class="form-control" asp-for="Resume.Educations[i].InstitutionUrl"/>
+                        </div>
+                        <div class="input-group mb-1">
+                            <label class="input-group-text col-3 col-md-2">Award: </label>
+                            <input class="form-control" asp-for="Resume.Educations[i].Credential"/>
+                        </div>
+                        <div class="input-group mb-1">
+                            <label class="input-group-text col-3 col-md-2">End: </label>
+                            <input class="form-control" asp-for="Resume.Educations[i].EndDate"/>
+                        </div>
+                    </div>
+                </div>
+            }
+            <div class="d-flex justify-content-between mb-1">
+                <label class="form-label">Certifications: </label>
+                <button class="btn btn-outline-success border-0" asp-action="AddCertification"><i class="fas fa-plus-circle"></i></button>
+            </div>
+            @for (int i = 0; i < Model.Resume.Certifications.Count; i++)
+            {
+                <div class="card mb-2">
+                    <div class="card-body">
+                        <div class="d-flex mb-1 justify-content-end"><button class="btn btn-danger" asp-action="RemoveCertification" asp-route-index="@i"><i class="fas fa-trash"></i></button></div>
+                        <div class="input-group mb-1">
+                            <label class="input-group-text col-3 col-md-2">Source: </label>
+                            <input class="form-control" asp-for="Resume.Certifications[i].Source"/>
+                        </div>
+                        <div class="input-group mb-1">
+                            <label class="input-group-text col-3 col-md-2">Url: </label>
+                            <input class="form-control" asp-for="Resume.Certifications[i].SourceUrl"/>
+                        </div>
+                        <div class="input-group mb-1">
+                            <label class="input-group-text col-3 col-md-2">Award: </label>
+                            <input class="form-control" asp-for="Resume.Certifications[i].Subject"/>
+                        </div>
+                        <div class="input-group mb-1">
+                            <label class="input-group-text col-3 col-md-2">Id: </label>
+                            <input class="form-control" asp-for="Resume.Certifications[i].CredentialId"/>
+                        </div>
+                        <div class="input-group mb-1">
+                            <label class="input-group-text col-3 col-md-2">Start: </label>
+                            <input class="form-control" asp-for="Resume.Certifications[i].StartDate"/>
+                        </div>
+                        <div class="input-group mb-1">
+                            <label class="input-group-text col-3 col-md-2">End: </label>
+                            <input class="form-control" asp-for="Resume.Certifications[i].EndDate"/>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </section>
+    <div class="row-cols-auto d-flex justify-content-end mt-lg-1">
+        <button type="submit" class="btn btn-primary col-12 col-lg-auto" asp-controller="Work" asp-action="SaveResume"><i class="fas fa-save"></i></button>
+    </div>
+</form>

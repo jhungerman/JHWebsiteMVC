@@ -1,0 +1,71 @@
+html {
+    font-size: 14px;
+}
+
+@media (min-width: 768px) {
+    html {
+        font-size: 16px;
+    }
+}
+
+html {
+    position: relative;
+    min-height: 100%;
+}
+
+body {
+    margin-bottom: 60px;
+    font-family: helvetica;
+}
+
+footer {
+    font-family: "Courier New";
+    position: absolute;
+    bottom: 0;
+}
+
+.introQuote {
+    height: 25vh;
+    font-size: 1.5em;
+}
+
+.name-title {
+    font-family: "Courier New";
+}
+
+.hr-bold {
+    border: 2px solid #000000;
+    margin: 0;
+}
+
+#devops {
+    max-height: 15px;
+}
+
+#divider-container {
+    border-radius: 0.25rem;
+    overflow: hidden;
+}
+
+#divider {
+    background-color: #EAF1DD;
+    height: 20px;
+    border-top: 2px solid black;
+    border-bottom: 2px solid black;
+}
+
+
+/*Media Queries*/
+@media only screen and (max-width: 360px) {
+    #credentialLabel {
+        display: none;
+    }
+}
+
+@media only screen and (max-width: 1200px) {
+    .introQuote, .edit-we-company {
+        flex-direction: column;
+        font-size: 1.25em
+    }
+}
+
