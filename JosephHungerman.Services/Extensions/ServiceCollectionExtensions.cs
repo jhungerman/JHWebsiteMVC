@@ -1,5 +1,5 @@
 ﻿using System.Diagnostics.CodeAnalysis;
-using JosephHungerman.Helpers;
+using JosephHungerman.Services.Helpers;
 using JosephHungerman.Services.Services;
 using JosephHungerman.Services.Services.Interfaces;
 using JosephHungerman.Services.Settings;

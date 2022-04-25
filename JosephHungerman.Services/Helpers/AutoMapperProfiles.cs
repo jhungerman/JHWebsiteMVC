@@ -2,7 +2,7 @@
 using JosephHungerman.Data.Models;
 using JosephHungerman.Services.Models.Dtos;
 
-namespace JosephHungerman.Helpers
+namespace JosephHungerman.Services.Helpers
 {
     public class AutoMapperProfiles : Profile
     {

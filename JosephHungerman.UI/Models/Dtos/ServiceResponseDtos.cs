@@ -1,4 +1,4 @@
-﻿namespace JosephHungerman.Models.Dtos
+﻿namespace JosephHungerman.UI.Models.Dtos
 {
     public class ServiceResponseDtos<TResultType> where TResultType : class, new()
     {

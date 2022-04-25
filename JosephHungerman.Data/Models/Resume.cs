@@ -2,7 +2,7 @@
 
 namespace JosephHungerman.Data.Models
 {
-    public class Resume : BaseEntity, IEntity
+    public class Resume : BaseEntity
     {
         [Required] 
         public DateTime Timestamp { get; set; } = DateTime.UtcNow;

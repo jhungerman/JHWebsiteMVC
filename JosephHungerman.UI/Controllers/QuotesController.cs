@@ -1,10 +1,10 @@
 ﻿using JosephHungerman.Data.Models;
-using JosephHungerman.Models.ViewModels;
 using JosephHungerman.Services.Services.Interfaces;
+using JosephHungerman.UI.Models.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
-namespace JosephHungerman.Controllers
+namespace JosephHungerman.UI.Controllers
 {
     public class QuotesController : Controller
     {

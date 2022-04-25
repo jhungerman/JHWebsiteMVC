@@ -7,7 +7,6 @@ using FluentAssertions;
 using JosephHungerman.Services.Models.Dtos;
 using JosephHungerman.Services.Services;
 using JosephHungerman.Services.Services.Interfaces;
-using JosephHungerman.Services.Settings;
 using Microsoft.Extensions.Options;
 using Moq;
 using SendGrid;
@@ -19,8 +18,6 @@ namespace JosephHungerman.Services.Tests
 {
     public class EmailServiceShould
     {
-        private readonly SendGridMessage _message;
-        private readonly IOptions<MailSettings> _mailSettings;
         private readonly MessageDto _messageDto;
         private readonly Mock<ISendGridClient> _client = new();
         private readonly Mock<Func<Response>> _response = new();
@@ -28,11 +25,11 @@ namespace JosephHungerman.Services.Tests
 
         public EmailServiceShould()
         {
-            _message = MailHelper.CreateSingleEmail(new("joe@joe.com"), new("ash@ash.com"),
+            var message = MailHelper.CreateSingleEmail(new("joe@joe.com"), new("ash@ash.com"),
                 "Hi", "Test", "");
-            _mailSettings = Options.Create(new MailSettings
+            var mailSettings = Options.Create(new MailSettings
             {
-                Mail = _message.From.ToString()!,
+                Mail = message.From.ToString()!,
                 ToMail = "test@gmail.com",
                 Host = "smtp@gmail.com",
                 Port = 587
@@ -45,7 +42,7 @@ namespace JosephHungerman.Services.Tests
                 Subject = "Hi",
                 Detail = "This is a unit test."
             };
-            _sut = new EmailService(_mailSettings, _client.Object);
+            _sut = new EmailService(mailSettings, _client.Object);
         }
 
         [Fact]

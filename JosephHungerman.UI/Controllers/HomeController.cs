@@ -1,19 +1,17 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using System.Diagnostics;
+﻿using System.Diagnostics;
 using JosephHungerman.Data.Models;
-using JosephHungerman.Models.ViewModels;
 using JosephHungerman.Services.Services.Interfaces;
+using JosephHungerman.UI.Models.ViewModels;
+using Microsoft.AspNetCore.Mvc;
 
-namespace JosephHungerman.Controllers
+namespace JosephHungerman.UI.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
         private readonly IQuoteService _quoteService;
 
-        public HomeController(ILogger<HomeController> logger, IQuoteService quoteService)
+        public HomeController(IQuoteService quoteService)
         {
-            _logger = logger;
             _quoteService = quoteService;
         }
 

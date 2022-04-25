@@ -1,6 +1,6 @@
 ﻿using JosephHungerman.Data.Models;
 
-namespace JosephHungerman.Models.ViewModels
+namespace JosephHungerman.UI.Models.ViewModels
 {
     public class AboutViewModel
     {

@@ -9,7 +9,7 @@ namespace JosephHungerman.Data.Models
         Technical
     }
 
-    public class Skill : BaseEntity, IEntity
+    public class Skill : BaseEntity
     {
         [Required] public string Name { get; set; }
         [Required] public SkillType SkillType { get; set; }

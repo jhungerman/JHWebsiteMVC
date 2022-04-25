@@ -25,7 +25,7 @@ namespace JosephHungerman.Services.Services
             {
                 var messages = await _unitOfWork.MessageRepository.GetAsync();
 
-                if (messages == null || !messages!.Any())
+                if (messages == null || !messages.Any())
                 {
                     return new ServiceResponseDtos<List<Message>>.ServiceNotFoundExceptionResponse();
                 }

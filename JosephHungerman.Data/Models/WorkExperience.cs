@@ -2,7 +2,7 @@
 
 namespace JosephHungerman.Data.Models
 {
-    public class WorkExperience : BaseEntity, IEntity
+    public class WorkExperience : BaseEntity
     {
         [Required]
         public string CompanyName { get; set; }

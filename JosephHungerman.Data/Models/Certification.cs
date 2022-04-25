@@ -2,7 +2,7 @@
 
 namespace JosephHungerman.Data.Models
 {
-    public class Certification : BaseEntity, IEntity
+    public class Certification : BaseEntity
     {
         [Required] public string Source { get; set; }
         public string? SourceUrl { get; set; }

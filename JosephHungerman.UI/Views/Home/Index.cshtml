@@ -1,7 +1,7 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
 }
-@model JosephHungerman.Models.ViewModels.HomeViewModel;
+@model JosephHungerman.UI.Models.ViewModels.HomeViewModel;
 @section Quotes {
     @await Html.PartialAsync("_QuotePartial", Model.Quote)
 }

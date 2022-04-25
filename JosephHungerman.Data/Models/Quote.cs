@@ -9,7 +9,7 @@
         Blog,
         MessageSuccess
     }
-    public class Quote : BaseEntity, IEntity
+    public class Quote : BaseEntity
     {
         public PageType PageType { get; set; }
         public string Text { get; set; }

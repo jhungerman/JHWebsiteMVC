@@ -1,6 +1,6 @@
 ﻿namespace JosephHungerman.Data.Models
 {
-    public class Section : BaseEntity, IEntity
+    public class Section : BaseEntity
     {
         public int OrderIndex { get; set; }
         public string Title { get; set; }

@@ -2,7 +2,7 @@
 
 namespace JosephHungerman.Data.Models
 {
-    public class Education : BaseEntity, IEntity
+    public class Education : BaseEntity
     {
         [Required]
         public string InstitutionName { get; set; }

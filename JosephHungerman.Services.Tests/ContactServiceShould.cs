@@ -21,10 +21,6 @@ namespace JosephHungerman.Services.Tests
         private readonly Mock<IUnitOfWork> _unitOfWork = new();
         private readonly Mock<IEmailService> _emailService = new();
 
-        public ContactServiceShould()
-        {
-        }
-
         #region GetMessages
 
         [Fact]
@@ -126,7 +122,6 @@ namespace JosephHungerman.Services.Tests
             var messageDtos = (List<MessageDto>)MockServiceResults.GetMessagesDtoSuccessResult();
             _unitOfWork.Setup(x => x.MessageRepository.AddAsync(messages.First())).ThrowsAsync(exception);
             _mapper.Setup(x => x.Map<Message>(messageDtos.First())).Returns(messages.First());
-            var message = _mapper.Object.Map<MessageDto>(messages.First());
 
             var sut = new ContactService(_unitOfWork.Object, _mapper.Object, _emailService.Object);
             var result = await sut.AddMessageAsync(messageDtos.First());
