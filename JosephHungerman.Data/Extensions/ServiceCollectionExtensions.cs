@@ -13,10 +13,18 @@ namespace JosephHungerman.Data.Extensions
         {
             services.AddDbContext<ApplicationDbContext>(options =>
             {
-                options.UseMySql(
-                    configuration.GetConnectionString("JshProd"),
-                    new MySqlServerVersion(new Version(5, 6)));
-                //new MariaDbServerVersion(new Version(10, 3)));
+                if (Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") == "Development")
+                {
+                    options.UseMySql(
+                        configuration.GetConnectionString("JshStage"),
+                    new MariaDbServerVersion(new Version(10, 3)));
+                }
+                else
+                {
+                    options.UseMySql(
+                        configuration.GetConnectionString("JshProd"),
+                        new MySqlServerVersion(new Version(5, 6)));
+                }
             });
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddScoped<DbInitializer>();
