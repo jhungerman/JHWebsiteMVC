@@ -1,0 +1,95 @@
+{
+  "Timestamp": "2022-04-19",
+  "Name": "Joseph Hungerman, CSM",
+  "Summary": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+  "WorkExperiences": [
+    {
+      "CompanyName": "Aeturnum,Inc",
+      "CompanyCity": "Boston",
+      "CompanyState": "MA",
+      "CompanyUrl": "www.aeturnum.com",
+      "StartDate": "2021-08-01",
+      "EndDate": null,
+      "Title": "IT Business Analyst",
+      "WorkDetails": [
+        {
+          "Detail": "Lorem Ipsum1"
+        },
+        {
+          "Detail": "Lorem Ipsum2"
+        }
+      ]
+    },
+    {
+      "CompanyName": "Ascension",
+      "CompanyCity": "Nashville",
+      "CompanyState": "TN",
+      "CompanyUrl": "www.ascension.org",
+      "StartDate": "2020-05-01",
+      "EndDate": "2021-07-01",
+      "Title": "Sr. Analyst-Data",
+      "WorkDetails": [
+        {
+          "Detail": "Lorem Ipsum3"
+        },
+        {
+          "Detail": "Lorem Ipsum4"
+        }
+      ]
+    }
+  ],
+  "Educations": [
+    {
+      "InstitutionName": "University of Alabama",
+      "Credential": "MS Operations Management - Decision Analytics",
+      "EndDate": "2018-05-01",
+      "InstitutionUrl": "www.ua.edu"
+    },
+    {
+      "InstitutionName": "Baker College",
+      "Credential": "BHSA Health Services Administration, Psychology Minor",
+      "EndDate": "2017-08-01",
+      "InstitutionUrl": "www.baker.edu"
+    }
+  ],
+  "Skills": [
+    {
+      "Name": "C#",
+      "SkillType": 2,
+      "IsKeySkill": true
+    },
+    {
+      "Name": "Excel",
+      "SkillType": 2,
+      "IsKeySkill": false
+    },
+    {
+      "Name": "Statistics",
+      "SkillType": 0,
+      "IsKeySkill": false
+    },
+    {
+      "Name": "Listening",
+      "SkillType": 1,
+      "IsKeySkill": true
+    }
+  ],
+  "Certifications": [
+    {
+      "Source": "ScrumAlliance",
+      "SourceUrl": "www.scrumalliance.org",
+      "Subject": "ScrumMaster",
+      "CredentialId": "620700",
+      "StartDate": "2017-02-01",
+      "EndDate": null
+    },
+    {
+      "Source": "SAS / UA",
+      "SourceUrl": "",
+      "Subject": "Data Mining",
+      "CredentialId": "",
+      "StartDate": "2017-04-01",
+      "EndDate": null
+    }
+  ]
+}

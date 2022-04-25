@@ -1,0 +1,44 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@model JosephHungerman.UI.Models.ViewModels.AboutViewModel
+@{
+}
+
+<div class="container-fluid mt-2">
+    <form method="post" asp-antiforgery="true">
+        <div class="card">
+            <h3 class="card-header">Sections</h3>
+            <div class="card-body">
+                <div class="d-flex justify-content-end mb-1">
+                    <button class="btn btn-outline-success border-0" asp-action="AddSection"><i class="fas fa-plus-circle"></i></button>
+                </div>
+                @for (int i = 0; i < Model.Sections.Count; i++)
+                {
+                    <section class="card mb-2">
+                        <div class="card-body">
+                            <div class="row d-flex align-items-center mb-1 justify-content-between">
+                                <div class="col-3 col-lg-6">
+                                    <input asp-for="Sections[i].Id" hidden />
+                                    <input asp-for="Sections[i].OrderIndex" />
+                                    <input asp-for="Sections[i].Title" />
+                                </div>
+                                <button class="btn btn-danger col-auto me-3" asp-action="RemoveSection" asp-route-index="@i"><i class="fas fa-trash"></i></button>
+                            </div>
+                            @for (int j = 0; j < Model.Sections[i].Paragraphs.Count; j++)
+                            {
+                                <input asp-for="Sections[i].Paragraphs[j].Id" hidden />
+                                <textarea class="input-group mb-1" asp-for="Sections[i].Paragraphs[j].Content" rows="10"></textarea>
+                                <button class="btn btn-outline-danger border-0 col-12" asp-action="RemoveParagraph" asp-route-sectionIndex="@i" asp-route-paraIndex="@j"><i class="fas fa-trash"></i></button>
+                            }
+                            <button class="btn btn-outline-success border-0 col-12" asp-action="AddParagraph" asp-route-sectionIndex="@i"><i class="fas fa-plus-circle"></i></button>
+                        </div>
+                    </section>
+                }
+            </div>
+        </div>
+        <div class="row-cols-auto d-flex justify-content-end mt-lg-1">
+            <button type="submit" class="btn btn-primary col-12 col-lg-auto" asp-action="SaveAbout"><i class="fas fa-save"></i></button>
+        </div>
+    </form>
+</div>

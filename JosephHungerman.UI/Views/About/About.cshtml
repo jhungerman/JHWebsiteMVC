@@ -1,0 +1,28 @@
+﻿@model JosephHungerman.UI.Models.ViewModels.AboutViewModel
+
+@section Quotes {
+    @await Html.PartialAsync("_QuotePartial", Model.Quote)
+}
+
+<div class="container">
+    @if (Model.Sections.Any())
+    {
+        @if (User.Identity.IsAuthenticated)
+        {
+            <div class="container-fluid mt-2" role="link">
+                <h2><a id="editBtn" asp-action="EditAbout"><span class="position-absolute end-0 me-3 text-black"><i class="fas fa-pencil fa-2xs"></i></span></a></h2>
+            </div>
+        }
+        foreach (var modelSection in Model.Sections)
+        {
+            <section class="container-fluid mt-2">
+                <h4>@modelSection.Title</h4>
+                @foreach (var paragraph in modelSection.Paragraphs)
+                {
+                    <br />
+                    <p>@paragraph.Content</p>
+                }
+            </section>
+        }
+    }
+</div>

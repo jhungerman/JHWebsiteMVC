@@ -1,0 +1,161 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@using JosephHungerman.Data.Models
+@model JosephHungerman.UI.Models.ViewModels.ResumeViewModel
+@section Quotes {
+    @await Html.PartialAsync("_QuotePartial", Model.Quote)
+}
+
+<div class="container">
+    @if (User.Identity.IsAuthenticated)
+    {
+        <section class="container-fluid my-2 d-flex flex-column flex-md-row justify-content-md-evenly justify-content-lg-between">
+            <img class="img-thumbnail" src="~/img/hun_0896bw.jpg" />
+            <h1 class="d-flex align-items-md-center justify-content-center">@Model.Resume.Name<a id="editBtn" asp-action="EditResume"><span class="position-absolute end-0 me-3 text-black"><i class="fas fa-pencil fa-2xs"></i></span></a></h1>
+        </section>
+    }
+    else
+    {
+        <section class="container-fluid my-2 d-flex flex-column flex-md-row justify-content-md-evenly justify-content-lg-between">
+            <img class="img-thumbnail" src="~/img/hun_0896bw.jpg" />
+            <h1 class="d-flex align-items-md-center justify-content-center">@Model.Resume.Name</h1>
+        </section>
+    }
+
+    <div id="divider-container">
+        <hr class="hr-bold" />
+        <div id="divider"></div>
+        <hr class="hr-bold" />
+    </div>
+    <section class="container-fluid my-2 card p-0">
+        <h4 class="text-center border-bottom card-header mb-1">Summary of Qualifications<span class="badge bg-warning position-absolute rounded-pill end-0 me-1" hidden id="summaryBadge">EDIT</span></h4>
+        <div class="card-body">
+            <p>@Model.Resume.Summary</p>
+        </div>
+    </section>
+    <section class="container-fluid my-2 card p-0">
+        <h4 class="text-center border-bottom card-header mb-1">Skills & Proficiencies</h4>
+        @{
+            var technical = Model.Resume.Skills.Where(s => s.SkillType == SkillType.Technical);
+            var business = Model.Resume.Skills.Where(s => s.SkillType == SkillType.Business);
+            var personal = Model.Resume.Skills.Where(s => s.SkillType == SkillType.Personal);
+        }
+        <section class="flex-column d-flex flex-md-row justify-content-md-around">
+            <div class="card border-0 col-md-3">
+                <h6 class="card-header bg-white text-center">Technical</h6>
+                <ul class="fa-ul card-body">
+                    @foreach (var skill in technical)
+                    {
+                        <li><span class="fa-li"><i class="fas fa-code-branch fa-2xs"></i></span>@skill.Name</li>
+                    }
+                </ul>
+            </div>
+            <div class="card border-0 col-md-3">
+                <h6 class="card-header bg-white text-center">Business</h6>
+                <ul class="fa-ul card-body">
+                    @foreach (var skill in business)
+                    {
+                        <li><span class="fa-li"><i class="fas fa-gear fa-2xs"></i></span>@skill.Name</li>
+                    }
+                </ul>
+            </div>
+            <div class="card border-0 col-md-3">
+                <h6 class="card-header bg-white text-center">Personal</h6>
+                <ul class="fa-ul card-body">
+                    @foreach (var skill in personal)
+                    {
+                        <li><span class="fa-li"><i class="fas fa-user fa-2xs"></i></span>@skill.Name</li>
+                    }
+                </ul>
+            </div>
+        </section>
+    </section>
+    <section class="container-fluid my-2 card p-0">
+        <h4 class="text-center border-bottom card-header mb-1">Employment</h4>
+        @foreach (var employment in Model.Resume.WorkExperiences)
+        {
+            var startDate = @employment.StartDate.ToString("MM/yyyy");
+            var endDate = @employment.EndDate == null ? "" : @employment.EndDate.Value.ToString("MM/yyyy");
+            <div class="row d-flex justify-content-between px-3">
+                <div class="d-flex col-6 flex-grow-1 flex-wrap">
+                    @if (employment.CompanyUrl == string.Empty)
+                    {
+                        <h6 class="col-auto mb-0 me-1 pt-1"><strong>@employment.CompanyName</strong></h6>
+                        <span class="me-1"><strong>&bull;</strong></span>
+                    }
+                    else
+                    {
+                        <h6 class="col-auto mb-0 me-1 pt-1"><strong><a href="https://@employment.CompanyUrl" target="_blank" class="text-decoration-none">@employment.CompanyName</a></strong></h6>
+                        <span class="me-1"><strong>&bull;</strong></span>
+                    }
+                    <h6 class="col-7 mb-0 pt-1">@employment.CompanyCity, @employment.CompanyState</h6>
+                </div>
+                <h6 class="d-flex justify-content-end col-3 pt-1 text-center">
+                    @startDate &#8211 @endDate
+                </h6>
+            </div>
+            <h6 class="row px-3"><strong><em>@employment.Title</em></strong></h6>
+            <ul class="fa-ul">
+                @foreach (var detail in employment.WorkDetails)
+                {
+                    <li><span class="fa-li"></span><i class="fa-solid fa-play fa-2xs me-1"></i>@detail.Detail</li>
+                }
+            </ul>
+        }
+    </section>
+    <section class="container-fluid my-2 card p-0">
+        <h4 class="text-center border-bottom card-header mb-1">Education</h4>
+        @foreach (var school in Model.Resume.Educations)
+        {
+            var date = @school.EndDate.ToString("MM/yyyy");
+            <div class="row d-flex justify-content-between px-3">
+                <div class="d-flex col-6 flex-grow-1">
+                    @if (school.InstitutionUrl == string.Empty)
+                    {
+                        <h6 class="col-6"><strong>@school.InstitutionName</strong></h6>
+                    }
+                    else
+                    {
+                        <h6 class="col-6"><strong><a href="https://@school.InstitutionUrl" target="_blank" class="text-decoration-none">@school.InstitutionName</a></strong></h6>
+                    }
+                    <h6 class="col-7">@school.Credential</h6>
+                </div>
+                <h6 class="d-flex justify-content-end col-3">
+                    @date
+                </h6>
+            </div>
+        }
+    </section>
+    <section class="container-fluid my-2 card p-0">
+        <h4 class="text-center border-bottom card-header mb-1">Certifications</h4>
+        @foreach (var cert in Model.Resume.Certifications)
+        {
+            var date = @cert.StartDate.ToString("MM/yyyy");
+            <div class="row d-flex justify-content-between px-3">
+                <div class="d-flex col-9">
+                    @if (cert.SourceUrl == string.Empty)
+                    {
+                        <h6 class="col-6"><strong>@cert.Source</strong></h6>
+                    }
+                    else
+                    {
+                        <h6 class="col-6"><strong><a href="https://@cert.SourceUrl" target="_blank" class="text-decoration-none">@cert.Source</a></strong></h6>
+                    }
+                    <h6 class="flex-grow-1 col-3">@cert.Subject</h6>
+                    @if (string.IsNullOrEmpty(cert.CredentialId))
+                    {
+                        <h6 class="col-2">@cert.CredentialId</h6>
+                    }
+                    else
+                    {
+                        <h6 id="credentialLabel" class="col-2"><span class="me-1">Id:</span>@cert.CredentialId</h6>
+                    }
+                </div>
+                <h6 class="d-flex justify-content-end col-3">
+                    @date
+                </h6>
+            </div>
+        }
+    </section>
+</div>

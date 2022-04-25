@@ -1,0 +1,61 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@model JosephHungerman.UI.Models.ViewModels.ContactViewModel
+@section Quotes {
+    @await Html.PartialAsync("_QuotePartial", Model.Quote)
+}
+
+<div class="container">
+<form method="post">
+    <div class="mb-3 row">
+        <label class="col-form-label">Name*:</label>
+        <div class="col-6">
+            <input class="form-control col-6" asp-for="Message.FirstName" aria-describedby="firstname-explanation" />
+            <p id="firstname-explanation" class="form-text">First Name</p>
+            <span asp-validation-for="Message.FirstName" class="text-danger"></span>
+        </div>
+        <div class="col-6">
+            <input class="form-control col-6" asp-for="Message.LastName" aria-describedby="lastname-explanation" />
+            <p id="lastname-explanation" class="form-text">Last Name</p>
+            <span asp-validation-for="Message.LastName" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="mb-3">
+        <label class="col-form-label">Email Address*:</label>
+        <input type="email" class="form-control" asp-for="Message.Email" aria-describedby="email-explanation" />
+        <p id="email-explanation" class="form-text">I will not share your email with anyone</p>
+        <span asp-validation-for="Message.Email" class="text-danger"></span>
+    </div>
+    <div class="mb-3">
+        <label class="col-form-label">Subject*:</label>
+        <input class="form-control" asp-for="Message.Subject" />
+        <span asp-validation-for="Message.Subject" class="text-danger"></span>
+    </div>
+    <div class="mb-3">
+        <label class="col-form-label">Message*:</label>
+        <textarea class="form-control" asp-for="Message.Detail"></textarea>
+        <span asp-validation-for="Message.Detail" class="text-danger"></span>
+    </div>
+    <div class="container d-flex flex-column align-items-end p-0">
+        <div class=" g-recaptcha mb-1" data-sitekey="@Model.CaptchaClientKey" data-callback="enableBtn"></div>
+        <button id="submit_form" type="submit" class="btn btn-primary ms-1" asp-controller="Contact" asp-action="SendMessage" data-callback="onSubmit" disabled>Submit</button>
+    </div>
+</form>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+        <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+        <script>
+            function enableBtn() {
+                document.getElementById("submit_form").disabled = false;
+            }
+            function onSubmit(token) {
+                document.getElementById("email-form").submit();
+            }
+        </script>
+
+    }
+}
