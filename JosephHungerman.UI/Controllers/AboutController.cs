@@ -48,6 +48,11 @@ namespace JosephHungerman.UI.Controllers
                     Sections = (List<Section>)sectionResponse.Result!
                 };
 
+                foreach (var modelSection in model.Sections)
+                {
+                    modelSection.Paragraphs = modelSection.Paragraphs.OrderBy(p => p.Id).ToList();
+                }
+
                 return View(model);
             }
 

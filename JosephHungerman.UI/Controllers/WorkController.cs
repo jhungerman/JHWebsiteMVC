@@ -58,6 +58,9 @@ namespace JosephHungerman.UI.Controllers
                     Resume = (Resume)response.Result!
                 };
 
+                resumeViewModel.Resume.WorkExperiences = resumeViewModel.Resume.WorkExperiences.OrderByDescending(we => we.EndDate ?? DateTime.MaxValue)
+                    .ThenByDescending(we => we.StartDate).ToList();
+
                 var quoteResponse = await _quoteService.GetPageQuoteAsync(PageType.Resume);
                 if (quoteResponse.IsSuccess)
                 {

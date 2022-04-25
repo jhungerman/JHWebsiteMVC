@@ -14,8 +14,9 @@ namespace JosephHungerman.Data.Extensions
             services.AddDbContext<ApplicationDbContext>(options =>
             {
                 options.UseMySql(
-                    configuration.GetConnectionString("JshStage"),
-                    new MariaDbServerVersion(new Version(10, 3)));
+                    configuration.GetConnectionString("JshProd"),
+                    new MySqlServerVersion(new Version(5, 6)));
+                //new MariaDbServerVersion(new Version(10, 3)));
             });
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddScoped<DbInitializer>();

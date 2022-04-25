@@ -68,10 +68,17 @@ namespace JosephHungerman.Services.Services
                         }
 
                         if (!string.IsNullOrEmpty(paragraphToRemove.Content)) currentSection.Paragraphs.Remove(paragraphToRemove);
-                        var result = await _unitOfWork.SectionRepository.UpdateAsync(currentSections.FirstOrDefault(cs => cs.Id == matchSection.Id)!);
+                        var result = await _unitOfWork.SectionRepository.UpdateAsync(currentSection);
                         results.Add(result);
                     }
 
+                }
+
+                var newSections = sections.Where(s => s.Id == 0).ToList();
+
+                if (newSections.Any())
+                {
+                    await _unitOfWork.SectionRepository.AddAllAsync(newSections);
                 }
 
                 var saveSuccessful = await _unitOfWork.SaveChangesAsync();

@@ -8,67 +8,67 @@
 }
 
 <div class="container">
-@if (User.Identity.IsAuthenticated)
-{
-    <section class="container-fluid my-2 d-flex flex-column flex-md-row justify-content-md-evenly justify-content-lg-between">
-        <img class="img-thumbnail" src="~/img/hun_0896bw.jpg" />
-        <h1 class="d-flex align-items-md-center justify-content-center">@Model.Resume.Name<a id="editBtn" asp-action="EditResume"><span class="position-absolute end-0 me-3 text-black"><i class="fas fa-pencil fa-2xs"></i></span></a></h1>
-    </section>
-}
-else
-{
-    <section class="container-fluid my-2 d-flex flex-column flex-md-row justify-content-md-evenly justify-content-lg-between">
-        <img class="img-thumbnail" src="~/img/hun_0896bw.jpg" />
-        <h1 class="d-flex align-items-md-center justify-content-center">@Model.Resume.Name</h1>
-    </section>
-}
-
-<div id="divider-container">
-    <hr class="hr-bold" />
-    <div id="divider"></div>
-    <hr class="hr-bold" />
-</div>
-<section class="container-fluid my-2 card p-0">
-    <h4 class="text-center border-bottom card-header mb-1">Summary of Qualifications<span class="badge bg-warning position-absolute rounded-pill end-0 me-1" hidden id="summaryBadge">EDIT</span></h4>
-    <div class="card-body">
-        <p>@Model.Resume.Summary</p>
-    </div>
-</section>
-<section class="container-fluid my-2 card p-0">
-    <h4 class="text-center border-bottom card-header mb-1">Skills & Proficiencies</h4>
-    @{
-        var technical = Model.Resume.Skills.Where(s => s.SkillType == SkillType.Technical);
-        var business = Model.Resume.Skills.Where(s => s.SkillType == SkillType.Business);
-        var personal = Model.Resume.Skills.Where(s => s.SkillType == SkillType.Personal);
+    @if (User.Identity.IsAuthenticated)
+    {
+        <section class="container-fluid my-2 d-flex flex-column flex-md-row justify-content-md-evenly justify-content-lg-between">
+            <img class="img-thumbnail" src="~/img/hun_0896bw.jpg" />
+            <h1 class="d-flex align-items-md-center justify-content-center">@Model.Resume.Name<a id="editBtn" asp-action="EditResume"><span class="position-absolute end-0 me-3 text-black"><i class="fas fa-pencil fa-2xs"></i></span></a></h1>
+        </section>
     }
-    <section class="flex-column d-flex flex-md-row justify-content-md-around">
-        <div class="card h-100 border-0">
-            <h6 class="card-header bg-white text-center">Technical</h6>
-            <ul class="fa-ul card-body">
-                @foreach (var skill in technical)
-                {
-                    <li><span class="fa-li"><i class="fas fa-code-branch fa-2xs"></i></span>@skill.Name</li>
-                }
-            </ul>
+    else
+    {
+        <section class="container-fluid my-2 d-flex flex-column flex-md-row justify-content-md-evenly justify-content-lg-between">
+            <img class="img-thumbnail" src="~/img/hun_0896bw.jpg" />
+            <h1 class="d-flex align-items-md-center justify-content-center">@Model.Resume.Name</h1>
+        </section>
+    }
+
+    <div id="divider-container">
+        <hr class="hr-bold" />
+        <div id="divider"></div>
+        <hr class="hr-bold" />
+    </div>
+    <section class="container-fluid my-2 card p-0">
+        <h4 class="text-center border-bottom card-header mb-1">Summary of Qualifications<span class="badge bg-warning position-absolute rounded-pill end-0 me-1" hidden id="summaryBadge">EDIT</span></h4>
+        <div class="card-body">
+            <p>@Model.Resume.Summary</p>
         </div>
-        <div class="card border-0">
-            <h6 class="card-header bg-white text-center">Business</h6>
-            <ul class="fa-ul card-body">
-                @foreach (var skill in business)
-                {
-                    <li><span class="fa-li"><i class="fas fa-gear fa-2xs"></i></span>@skill.Name</li>
-                }
-            </ul>
-        </div>
-        <div class="card border-0">
-            <h6 class="card-header bg-white text-center">Personal</h6>
-            <ul class="fa-ul card-body">
-                @foreach (var skill in personal)
-                {
-                    <li><span class="fa-li"><i class="fas fa-user fa-2xs"></i></span>@skill.Name</li>
-                }
-            </ul>
-        </div>
+    </section>
+    <section class="container-fluid my-2 card p-0">
+        <h4 class="text-center border-bottom card-header mb-1">Skills & Proficiencies</h4>
+        @{
+            var technical = Model.Resume.Skills.Where(s => s.SkillType == SkillType.Technical);
+            var business = Model.Resume.Skills.Where(s => s.SkillType == SkillType.Business);
+            var personal = Model.Resume.Skills.Where(s => s.SkillType == SkillType.Personal);
+        }
+        <section class="flex-column d-flex flex-md-row justify-content-md-around">
+            <div class="card border-0 col-md-3">
+                <h6 class="card-header bg-white text-center">Technical</h6>
+                <ul class="fa-ul card-body">
+                    @foreach (var skill in technical)
+                    {
+                        <li><span class="fa-li"><i class="fas fa-code-branch fa-2xs"></i></span>@skill.Name</li>
+                    }
+                </ul>
+            </div>
+            <div class="card border-0 col-md-3">
+                <h6 class="card-header bg-white text-center">Business</h6>
+                <ul class="fa-ul card-body">
+                    @foreach (var skill in business)
+                    {
+                        <li><span class="fa-li"><i class="fas fa-gear fa-2xs"></i></span>@skill.Name</li>
+                    }
+                </ul>
+            </div>
+            <div class="card border-0 col-md-3">
+                <h6 class="card-header bg-white text-center">Personal</h6>
+                <ul class="fa-ul card-body">
+                    @foreach (var skill in personal)
+                    {
+                        <li><span class="fa-li"><i class="fas fa-user fa-2xs"></i></span>@skill.Name</li>
+                    }
+                </ul>
+            </div>
         </section>
     </section>
     <section class="container-fluid my-2 card p-0">
@@ -78,7 +78,7 @@ else
             var startDate = @employment.StartDate.ToString("MM/yyyy");
             var endDate = @employment.EndDate == null ? "" : @employment.EndDate.Value.ToString("MM/yyyy");
             <div class="row d-flex justify-content-between px-3">
-                <div class="d-flex col-6 flex-grow-1">
+                <div class="d-flex col-6 flex-grow-1 flex-wrap">
                     @if (employment.CompanyUrl == string.Empty)
                     {
                         <h6 class="col-auto mb-0 me-1 pt-1"><strong>@employment.CompanyName</strong></h6>
