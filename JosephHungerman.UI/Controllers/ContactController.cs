@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace JosephHungerman.UI.Controllers
 {
+    [AutoValidateAntiforgeryToken]
     public class ContactController : Controller
     {
         private readonly IContactService _service;

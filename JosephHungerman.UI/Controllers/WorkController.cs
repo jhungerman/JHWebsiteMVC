@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace JosephHungerman.UI.Controllers
 {
+    [AutoValidateAntiforgeryToken]
     public class WorkController : Controller
     {
         private readonly IResumeService _resumeService;
