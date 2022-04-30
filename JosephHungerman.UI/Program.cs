@@ -14,6 +14,10 @@ builder.Configuration.AddAzureKeyVault(keyVaultEndpoint, new DefaultAzureCredent
 // Add services to the container.
 builder.Services.AddAuthentication(OpenIdConnectDefaults.AuthenticationScheme)
     .AddMicrosoftIdentityWebApp(builder.Configuration);
+builder.Services.AddAntiforgery(options =>
+{
+    options.Cookie.SecurePolicy = CookieSecurePolicy.Always;
+});
 builder.Services.AddControllersWithViews().AddJsonOptions(options =>
 {
     options.JsonSerializerOptions.PropertyNameCaseInsensitive = true;
@@ -29,6 +33,7 @@ builder.Services.AddSwaggerGen(options =>
     options.EnableAnnotations();
 });
 
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -38,6 +43,18 @@ if (!app.Environment.IsDevelopment())
     // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
+
+app.Use(async (context, next) =>
+{
+    context.Response.Headers.Add("X-XSS-PROTECTION", "1; mode=block");
+    context.Response.Headers.Add("X-Content-Type-Options", "nosniff");
+    context.Response.Headers.Add("X-Frame-Options", "DENY");
+    //context.Response.Headers.Add("Content-Security-Policy", "default-src 'self';");
+    context.Response.Headers.Add("Referrer-Policy", "no-referrer");
+    context.Response.Headers.Add("X-Permitted-Cross-Domain-Policies", "none");
+    context.Response.Headers.Remove("X-ASPNET-VERSION");
+    await next();
+});
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
@@ -50,6 +67,8 @@ app.UseAuthorization();
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
+
+app.MapControllers();
 
 app.UseSwagger();
 
