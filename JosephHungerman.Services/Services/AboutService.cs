@@ -65,6 +65,9 @@ namespace JosephHungerman.Services.Services
                                 paragraphToRemove = currentSectionParagraph;
                                 await _unitOfWork.ParagraphRepository.DeleteAsync(currentSectionParagraph);
                             }
+
+                            currentSectionParagraph.Content = matchParagraph!.Content;
+                            await _unitOfWork.ParagraphRepository.UpdateAsync(currentSectionParagraph);
                         }
 
                         if (!string.IsNullOrEmpty(paragraphToRemove.Content)) currentSection.Paragraphs.Remove(paragraphToRemove);

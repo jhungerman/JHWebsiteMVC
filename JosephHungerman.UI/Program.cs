@@ -1,19 +1,20 @@
 using System.Text.Json;
-using Microsoft.AspNetCore.Authentication.OpenIdConnect;
-using Microsoft.Identity.Web;
-using Microsoft.Identity.Web.UI;
 using Azure.Identity;
 using JosephHungerman.Data.Extensions;
+using JosephHungerman.Identity.Extensions;
 using JosephHungerman.Services.Extensions;
+using Microsoft.Identity.Web.UI;
 
 var builder = WebApplication.CreateBuilder(args);
+
+
 
 var keyVaultEndpoint = new Uri(builder.Configuration.GetSection("VaultUri").Value);
 builder.Configuration.AddAzureKeyVault(keyVaultEndpoint, new DefaultAzureCredential());
 
 // Add services to the container.
-builder.Services.AddAuthentication(OpenIdConnectDefaults.AuthenticationScheme)
-    .AddMicrosoftIdentityWebApp(builder.Configuration);
+//builder.Services.AddAuthentication(OpenIdConnectDefaults.AuthenticationScheme)
+//    .AddMicrosoftIdentityWebApp(builder.Configuration);
 builder.Services.AddAntiforgery(options =>
 {
     options.Cookie.SecurePolicy = CookieSecurePolicy.Always;
@@ -23,8 +24,11 @@ builder.Services.AddControllersWithViews().AddJsonOptions(options =>
     options.JsonSerializerOptions.PropertyNameCaseInsensitive = true;
     options.JsonSerializerOptions.PropertyNamingPolicy = JsonNamingPolicy.CamelCase;
 }).AddMicrosoftIdentityUI();
+
+// Add extension services from other projects
 builder.Services.AddApplicationServices(builder.Configuration);
 builder.Services.AddDataServices(builder.Configuration);
+builder.Services.AddIdentityServices(builder.Configuration);
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
@@ -46,6 +50,7 @@ if (!app.Environment.IsDevelopment())
 
 app.Use(async (context, next) =>
 {
+    //await next.Invoke();
     context.Response.Headers.Add("X-XSS-PROTECTION", "1; mode=block");
     context.Response.Headers.Add("X-Content-Type-Options", "nosniff");
     context.Response.Headers.Add("X-Frame-Options", "DENY");
@@ -69,6 +74,7 @@ app.MapControllerRoute(
     pattern: "{controller=Home}/{action=Index}/{id?}");
 
 app.MapControllers();
+app.MapRazorPages();
 
 app.UseSwagger();
 

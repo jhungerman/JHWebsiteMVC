@@ -1,14 +1,32 @@
-﻿<ul class="navbar-nav" role="navigation">
-@if (User.Identity.IsAuthenticated)
-{
-        <li class="nav-item">
-            <a class="nav-link text-dark" asp-area="MicrosoftIdentity" asp-controller="Account" asp-action="SignOut">Sign out</a>
-        </li>
-}
-else
-{
-        <li class="nav-item">
-            <a class="nav-link text-dark" asp-area="MicrosoftIdentity" asp-controller="Account" asp-action="SignIn">Sign in</a>
-        </li>
-}
-</ul>
+﻿@using Microsoft.AspNetCore.Identity
+@using JosephHungerman.Identity.Models
+
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+
+<li class="nav-item dropdown" aria-labelledby="navbarDropdownMenuLink">
+    <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+        .admin
+    </a>
+    @if (SignInManager.IsSignedIn(User))
+    {
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                <li class="dropdown-item">
+                    <form id="logoutForm" class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new {area = ""})">
+                        <button id="logout" type="submit" class="nav-link btn btn-link text-dark">.logout</button>
+                    </form>
+                </li>
+            </ul>
+    }
+    else
+    {
+        <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+            <li class="dropdown-item">
+                <a class="nav-link text-dark" id="register" asp-area="Identity" asp-page="/Account/Register">.register*</a>
+            </li>
+            <li class="dropdown-item">
+                <a class="nav-link text-dark" id="login" asp-area="Identity" asp-page="/Account/Login">.login*</a>
+            </li>
+        </ul>
+    }
+</li>
